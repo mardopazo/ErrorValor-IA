@@ -1,0 +1,54 @@
+Parte 1: Plantilla de Post-Mortem sin Culpas (Blameless Post-Mortem)
+
+Nota para el facilitador: Recordar iniciar esta reunión leyendo la "Directiva Primaria". 
+El objetivo es entender cómo el sistema permitió que ocurriera el error, no quién apretó el botón.
+
+🛠️ REPORTE DE POST-MORTEM: [Nombre Corto del Incidente]
+
+Fecha del incidente: DD/MM/AAAA
+Líder de la investigación: [Nombre]
+Estado: [En Revisión / Completado]
+
+1. 🚨 Declaración de Contexto (La Directiva Primaria)
+
+"Independientemente de lo que descubramos hoy, se usa como premisa que todos hicieron el mejor trabajo posible con la información, las herramientas, el tiempo y los recursos disponibles en ese momento."
+
+2. 📝 Resumen Ejecutivo
+
+Breve descripción de qué pasó, cuál fue el impacto en los usuarios/sistema y cómo se resolvió a grandes rasgos.
+* ¿Qué falló?:
+* Impacto: (Ej: 15% de las transacciones fallaron durante 2 horas).
+
+3. ⏳ Cronología de los Hechos (Timeline)
+
+Línea de tiempo objetiva. Evita usar nombres propios; usa roles o acciones del sistema.
+* 14:00 – Se despliega la versión X en el entorno de producción.
+* 14:05 – El sistema de alertas detecta un pico de errores 500 en el módulo de pagos.
+* 14:12 – El equipo de guardia recibe la notificación e inicia el triaje.
+* 14:30 – Se identifica que el cambio en la variable de entorno DB_TIMEOUT causó el bloqueo.
+* 14:45 – Se realiza un rollback a la versión anterior. Sistema estable.
+
+4. 🔬 Análisis de Causa Raíz (Los 5 ¿Por qué?)
+
+Metodología para llegar al problema sistémico profundo.
+1. ¿Por qué fallaron los pagos? -Porque la base de datos no respondió a tiempo.-
+2. ¿Por qué no respondió a tiempo? -Porque el parámetro de timeout se redujo drásticamente.-
+3. ¿Por qué se redujo drásticamente? -Porque se unificó la configuración con el entorno de testing.-
+4. ¿Por qué se unificó sin validar el impacto? -Porque el proceso de revisión de variables de entorno es manual y no está documentado en el pipeline.-
+5. ¿Por qué es manual? (Causa raíz) -Porque no contamos con una herramienta de gestión de configuración automatizada que valide límites según el entorno.-
+
+5. 🛑 Factores Contribuyentes (El Entorno)
+
+¿Qué elementos del entorno o las herramientas facilitaron que el error ocurriera?
+* Falta de visibilidad: El sistema de monitoreo no reflejó la saturación de conexiones de inmediato.
+* Documentación desactualizada: El manual de despliegue no mencionaba las dependencias de esa variable.
+
+6. 🚀 Plan de Acción y Mitigación Futura
+
+Tareas concretas con dueños para que el sistema sea más robusto. Ninguna acción debe ser "que el desarrollador tenga más cuidado".
+
+Acción Preventiva / Correctiva													Prioridad (Alta/Media)	Ticket asociado (Jira)
+Automatizar la validación de variables en el pipeline de CI/CD.					Alta					PROD-1234
+Configurar alertas específicas para el pool de conexiones de la base de datos.	Media					PROD-1235
+Actualizar la documentación de arquitectura del módulo de pagos.				Baja					PROD-1236
+

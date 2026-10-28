@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anexo A. Plantilla de post-mortem sin culpa — ErrorValor-IA</title>
+<meta name="description" content="Plantilla para analizar un incidente sin buscar culpables. Copiala, completala con el equipo y guardala junto al ticket.">
+<meta name="author" content="Martín Dopazo">
+<link rel="canonical" href="https://mardopazo.github.io/ErrorValor-IA/anexo-a.html">
+<meta name="theme-color" content="#edf0ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11181b" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_AR">
+<meta property="og:site_name" content="ErrorValor-IA">
+<meta property="og:title" content="Anexo A. Plantilla de post-mortem sin culpa">
+<meta property="og:description" content="Plantilla para analizar un incidente sin buscar culpables. Copiala, completala con el equipo y guardala junto al ticket.">
+<meta property="og:url" content="https://mardopazo.github.io/ErrorValor-IA/anexo-a.html">
+<meta property="og:image" content="https://mardopazo.github.io/ErrorValor-IA/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Planta de un panóptico con una celda resaltada y el título del paper.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/literata-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem("tema");if(t)document.documentElement.setAttribute("data-tema",t)}catch(e){}</script>
+</head>
+<body class="anexo">
+<a class="salto" href="#contenido">Saltar al contenido</a>
+<header class="barra">
+  <a class="marca" href="index.html" aria-label="ErrorValor-IA, inicio">Error<b>Valor</b>-IA</a>
+  <nav class="nav" aria-label="Principal"><a href="index.html">Paper</a><a href="anexo-a.html" aria-current="page">Anexo A</a><a href="anexo-b.html">Anexo B</a><a href="https://github.com/mardopazo/ErrorValor-IA" rel="noopener">Repositorio</a></nav>
+  <div class="herramientas">
+    <button class="boton-icono" id="boton-tema" type="button" aria-label="Cambiar entre tema claro y oscuro"><svg class="icono-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icono-luna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+    <button class="boton-icono" id="boton-menu" type="button" aria-expanded="false" aria-controls="lateral">Contenido</button>
+  </div>
+</header>
+<section class="encabezado-anexo" aria-labelledby="titulo">
+  <h1 id="titulo">Anexo A. Plantilla de post-mortem sin culpa</h1>
+  <p>Plantilla para analizar un incidente sin buscar culpables. Copiala, completala con el equipo y guardala junto al ticket.</p>
+  <div class="acciones">
+    <button class="boton principal" id="boton-copiar" type="button">Copiar en Markdown</button>
+    <a class="boton" href="fuentes/anexo-a-postmortem.md" download>Descargar .md</a>
+    <span class="estado" id="estado-copia" role="status" aria-live="polite"></span>
+  </div>
+</section>
+<div class="pagina">
+  <aside class="lateral" id="lateral" aria-label="Contenido de la página">
+    <nav class="nav-movil" aria-label="Secciones del sitio"><a href="index.html">Paper</a><a href="anexo-a.html" aria-current="page">Anexo A</a><a href="anexo-b.html">Anexo B</a><a href="https://github.com/mardopazo/ErrorValor-IA" rel="noopener">Repositorio</a></nav>
+    <svg class="anillo" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><a href="#reporte-de-post-mortem-nombre-corto-del-incidente" aria-hidden="true" tabindex="-1"><path data-sec="0" d="M61.47 4.02 A56 56 0 0 1 91.72 13.85 L79.26 31.98 A34 34 0 0 0 60.89 26.01 Z"><title>Reporte de post-mortem: [nombre corto del incidente]</title></path></a><a href="#seccion-1" aria-hidden="true" tabindex="-1"><path data-sec="1" d="M94.09 15.57 A56 56 0 0 1 112.79 41.31 L92.05 48.65 A34 34 0 0 0 80.70 33.03 Z"><title>1. Directiva Primaria</title></path></a><a href="#seccion-2" aria-hidden="true" tabindex="-1"><path data-sec="2" d="M113.69 44.10 A56 56 0 0 1 113.69 75.90 L92.60 69.66 A34 34 0 0 0 92.60 50.34 Z"><title>2. Resumen ejecutivo</title></path></a><a href="#seccion-3" aria-hidden="true" tabindex="-1"><path data-sec="3" d="M112.79 78.69 A56 56 0 0 1 94.09 104.43 L80.70 86.97 A34 34 0 0 0 92.05 71.35 Z"><title>3. Cronología de los hechos</title></path></a><a href="#seccion-4" aria-hidden="true" tabindex="-1"><path data-sec="4" d="M91.72 106.15 A56 56 0 0 1 61.47 115.98 L60.89 93.99 A34 34 0 0 0 79.26 88.02 Z"><title>4. Análisis de causa raíz (los 5 ¿por qué?)</title></path></a><a href="#seccion-5" aria-hidden="true" tabindex="-1"><path data-sec="5" d="M58.53 115.98 A56 56 0 0 1 28.28 106.15 L40.74 88.02 A34 34 0 0 0 59.11 93.99 Z"><title>5. Participación de IA en el cambio</title></path></a><a href="#seccion-6" aria-hidden="true" tabindex="-1"><path data-sec="6" d="M25.91 104.43 A56 56 0 0 1 7.21 78.69 L27.95 71.35 A34 34 0 0 0 39.30 86.97 Z"><title>6. Factores contribuyentes (el entorno)</title></path></a><a href="#seccion-7" aria-hidden="true" tabindex="-1"><path data-sec="7" d="M6.31 75.90 A56 56 0 0 1 6.31 44.10 L27.40 50.34 A34 34 0 0 0 27.40 69.66 Z"><title>7. Dónde tuvimos suerte y qué todavía no sabemos</title></path></a><a href="#seccion-8" aria-hidden="true" tabindex="-1"><path data-sec="8" d="M7.21 41.31 A56 56 0 0 1 25.91 15.57 L39.30 33.03 A34 34 0 0 0 27.95 48.65 Z"><title>8. Plan de acción y mitigación</title></path></a><a href="#seccion-9" aria-hidden="true" tabindex="-1"><path data-sec="9" d="M28.28 13.85 A56 56 0 0 1 58.53 4.02 L59.11 26.01 A34 34 0 0 0 40.74 31.98 Z"><title>9. Aprendizaje a compartir</title></path></a><circle cx="60" cy="60" r="14"/></svg>
+    <p class="contenido-titulo">En esta página</p>
+    <ol class="indice"><li><a href="#reporte-de-post-mortem-nombre-corto-del-incidente">Reporte de post-mortem: [nombre corto del incidente]</a></li><li><a href="#seccion-1">1. Directiva Primaria</a></li><li><a href="#seccion-2">2. Resumen ejecutivo</a></li><li><a href="#seccion-3">3. Cronología de los hechos</a></li><li><a href="#seccion-4">4. Análisis de causa raíz (los 5 ¿por qué?)</a></li><li><a href="#seccion-5">5. Participación de IA en el cambio</a></li><li><a href="#seccion-6">6. Factores contribuyentes (el entorno)</a></li><li><a href="#seccion-7">7. Dónde tuvimos suerte y qué todavía no sabemos</a></li><li><a href="#seccion-8">8. Plan de acción y mitigación</a></li><li><a href="#seccion-9">9. Aprendizaje a compartir</a></li></ol>
+  </aside>
+  <main class="prosa" id="contenido">
+<div class="hoja"><div class="intro"><p><strong>Nota para quien facilita:</strong> iniciar la reunión leyendo en voz alta la Directiva Primaria (sección 1). El objetivo es entender <strong>cómo el sistema permitió que ocurriera el error</strong>, no quién apretó el botón.</p>
+<hr />
+</div><section id="reporte-de-post-mortem-nombre-corto-del-incidente"><h2 id="reporte-de-post-mortem-nombre-corto-del-incidente">Reporte de post-mortem: [nombre corto del incidente]</h2>
+<div class="tabla" tabindex="0" role="region" aria-label="Tabla"><table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fecha del incidente</td>
+<td>DD/MM/AAAA</td>
+</tr>
+<tr>
+<td>Líder de la investigación</td>
+<td>[nombre]</td>
+</tr>
+<tr>
+<td>Estado</td>
+<td>En revisión / Completado</td>
+</tr>
+</tbody>
+</table></div>
+</section><section id="seccion-1"><h2 id="seccion-1"><span class="num">1</span>Directiva Primaria</h2>
+<blockquote class="tesis">
+<p>“Independientemente de lo que descubramos hoy, se parte de la premisa de que todos hicieron el mejor trabajo posible con la información, las herramientas, el tiempo y los recursos disponibles en ese momento.”</p>
+</blockquote>
+<p><em>Adaptada de la “Directiva Primaria” de las retrospectivas (Norm Kerth, 2001).</em></p>
+</section><section id="seccion-2"><h2 id="seccion-2"><span class="num">2</span>Resumen ejecutivo</h2>
+<p>Breve descripción de qué pasó, qué impacto tuvo en usuarios o sistema y cómo se resolvió a grandes rasgos.</p>
+<ul>
+<li><strong>¿Qué falló?</strong></li>
+<li><strong>Impacto:</strong> (ej.: el 15 % de las transacciones falló durante 2 horas).</li>
+</ul>
+</section><section id="seccion-3"><h2 id="seccion-3"><span class="num">3</span>Cronología de los hechos</h2>
+<p>Línea de tiempo objetiva. Evitar nombres propios: usar roles o acciones del sistema.</p>
+<ul>
+<li>14:00 – Se despliega la versión X en producción.</li>
+<li>14:05 – El sistema de alertas detecta un pico de errores 500 en el módulo de pagos.</li>
+<li>14:12 – El equipo de guardia recibe la notificación e inicia el triaje.</li>
+<li>14:30 – Se identifica que el cambio en la variable de entorno <code>DB_TIMEOUT</code> causó el bloqueo.</li>
+<li>14:45 – Se realiza rollback a la versión anterior. Sistema estable.</li>
+</ul>
+</section><section id="seccion-4"><h2 id="seccion-4"><span class="num">4</span>Análisis de causa raíz (los 5 ¿por qué?)</h2>
+<p>Método para llegar al problema sistémico. Sirve como guía, no como regla: un incidente suele tener <strong>varias</strong> causas, que se recogen en la sección 6.</p>
+<ol>
+<li>¿Por qué fallaron los pagos? <em>Porque la base de datos no respondió a tiempo.</em></li>
+<li>¿Por qué no respondió a tiempo? <em>Porque el parámetro de timeout se redujo drásticamente.</em></li>
+<li>¿Por qué se redujo? <em>Porque se unificó la configuración con el entorno de testing.</em></li>
+<li>¿Por qué se unificó sin validar el impacto? <em>Porque la revisión de variables de entorno es manual y no está documentada en el pipeline.</em></li>
+<li>¿Por qué es manual? <em>Porque no hay una herramienta de gestión de configuración que valide límites según el entorno.</em></li>
+</ol>
+</section><section id="seccion-5"><h2 id="seccion-5"><span class="num">5</span>Participación de IA en el cambio</h2>
+<p><em>Completar si el código involucrado fue generado o asistido por IA. Esta sección no busca atribuir culpa a la herramienta ni a la persona: busca entender qué parte del proceso quedó sin comprensión humana.</em></p>
+<ul>
+<li><strong>Herramienta y contexto:</strong> ¿qué herramienta se usó y qué contexto (archivos, requisitos, restricciones) recibió?</li>
+<li><strong>Prompt o instrucción:</strong> ¿qué se pidió exactamente? ¿Faltaba información de la regla de negocio?</li>
+<li><strong>Qué se revisó realmente:</strong> ¿hubo lectura línea por línea, tests propios, prueba manual? ¿Quién aprobó?</li>
+<li><strong>Comprensión:</strong> ¿el equipo hoy puede explicar qué hace ese cambio y qué casos no cubre?</li>
+<li><strong>Casos no contemplados:</strong> ¿qué situaciones borde o de excepción no se consideraron?</li>
+</ul>
+</section><section id="seccion-6"><h2 id="seccion-6"><span class="num">6</span>Factores contribuyentes (el entorno)</h2>
+<p>¿Qué elementos del entorno o de las herramientas facilitaron que el error ocurriera?</p>
+<ul>
+<li><strong>Falta de visibilidad:</strong> el monitoreo no reflejó la saturación de conexiones de inmediato.</li>
+<li><strong>Documentación desactualizada:</strong> el manual de despliegue no mencionaba las dependencias de esa variable.</li>
+<li><strong>Presión de plazos o de métricas:</strong> (completar si corresponde).</li>
+</ul>
+</section><section id="seccion-7"><h2 id="seccion-7"><span class="num">7</span>Dónde tuvimos suerte y qué todavía no sabemos</h2>
+<ul>
+<li><strong>Suerte:</strong> ¿qué pudo haber salido peor y no salió? (ej.: el incidente ocurrió fuera de la hora pico).</li>
+<li><strong>Incógnitas:</strong> ¿qué preguntas quedan abiertas? ¿Qué no podemos explicar todavía?</li>
+</ul>
+</section><section id="seccion-8"><h2 id="seccion-8"><span class="num">8</span>Plan de acción y mitigación</h2>
+<p>Tareas concretas, <strong>con responsable y fecha</strong>, para que el sistema sea más robusto. <strong>Ninguna acción puede ser “que el desarrollador tenga más cuidado”.</strong></p>
+<div class="tabla" tabindex="0" role="region" aria-label="Tabla"><table>
+<thead>
+<tr>
+<th>Acción preventiva o correctiva</th>
+<th>Dueño</th>
+<th>Prioridad (Alta / Media / Baja)</th>
+<th>Fecha objetivo</th>
+<th>Ticket</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Automatizar la validación de variables en el pipeline de CI/CD</td>
+<td>[rol o nombre]</td>
+<td>Alta</td>
+<td>DD/MM</td>
+<td>PROD-1234</td>
+</tr>
+<tr>
+<td>Configurar alertas específicas para el pool de conexiones de la base de datos</td>
+<td>[rol o nombre]</td>
+<td>Media</td>
+<td>DD/MM</td>
+<td>PROD-1235</td>
+</tr>
+<tr>
+<td>Actualizar la documentación de arquitectura del módulo de pagos</td>
+<td>[rol o nombre]</td>
+<td>Baja</td>
+<td>DD/MM</td>
+<td>PROD-1236</td>
+</tr>
+</tbody>
+</table></div>
+</section><section id="seccion-9"><h2 id="seccion-9"><span class="num">9</span>Aprendizaje a compartir</h2>
+<p>Una o dos frases que el equipo pueda llevarse, redactadas sin nombres propios y publicables.</p>
+<hr />
+<p><em>Un post-mortem sin acciones cerradas es un ritual vacío. Revisar el estado de la tabla de la sección 8 en la siguiente retrospectiva.</em></p></section></div>
+  </main>
+</div>
+<footer class="pie">
+  <div>
+    <p>Martín Dopazo. Este texto es un borrador en revisión: se puede discutir, corregir y mejorar.</p>
+    <p><a href="https://github.com/mardopazo/ErrorValor-IA" rel="noopener">Código y fuentes en GitHub</a></p>
+  </div>
+</footer>
+<script src="assets/site.js" defer></script>
+<script type="text/plain" id="fuente-md">
+# Anexo A. Plantilla de post-mortem sin culpa
+
+**Nota para quien facilita:** iniciar la reunión leyendo en voz alta la Directiva Primaria (sección 1). El objetivo es entender **cómo el sistema permitió que ocurriera el error**, no quién apretó el botón.
+
+---
+
+## Reporte de post-mortem: [nombre corto del incidente]
+
+| Campo | Valor |
+|---|---|
+| Fecha del incidente | DD/MM/AAAA |
+| Líder de la investigación | [nombre] |
+| Estado | En revisión / Completado |
+
+## 1. Directiva Primaria
+
+> "Independientemente de lo que descubramos hoy, se parte de la premisa de que todos hicieron el mejor trabajo posible con la información, las herramientas, el tiempo y los recursos disponibles en ese momento."
+
+*Adaptada de la "Directiva Primaria" de las retrospectivas (Norm Kerth, 2001).*
+
+## 2. Resumen ejecutivo
+
+Breve descripción de qué pasó, qué impacto tuvo en usuarios o sistema y cómo se resolvió a grandes rasgos.
+
+- **¿Qué falló?**
+- **Impacto:** (ej.: el 15 % de las transacciones falló durante 2 horas).
+
+## 3. Cronología de los hechos
+
+Línea de tiempo objetiva. Evitar nombres propios: usar roles o acciones del sistema.
+
+- 14:00 – Se despliega la versión X en producción.
+- 14:05 – El sistema de alertas detecta un pico de errores 500 en el módulo de pagos.
+- 14:12 – El equipo de guardia recibe la notificación e inicia el triaje.
+- 14:30 – Se identifica que el cambio en la variable de entorno `DB_TIMEOUT` causó el bloqueo.
+- 14:45 – Se realiza rollback a la versión anterior. Sistema estable.
+
+## 4. Análisis de causa raíz (los 5 ¿por qué?)
+
+Método para llegar al problema sistémico. Sirve como guía, no como regla: un incidente suele tener **varias** causas, que se recogen en la sección 6.
+
+1. ¿Por qué fallaron los pagos? *Porque la base de datos no respondió a tiempo.*
+2. ¿Por qué no respondió a tiempo? *Porque el parámetro de timeout se redujo drásticamente.*
+3. ¿Por qué se redujo? *Porque se unificó la configuración con el entorno de testing.*
+4. ¿Por qué se unificó sin validar el impacto? *Porque la revisión de variables de entorno es manual y no está documentada en el pipeline.*
+5. ¿Por qué es manual? *Porque no hay una herramienta de gestión de configuración que valide límites según el entorno.*
+
+## 5. Participación de IA en el cambio
+
+*Completar si el código involucrado fue generado o asistido por IA. Esta sección no busca atribuir culpa a la herramienta ni a la persona: busca entender qué parte del proceso quedó sin comprensión humana.*
+
+- **Herramienta y contexto:** ¿qué herramienta se usó y qué contexto (archivos, requisitos, restricciones) recibió?
+- **Prompt o instrucción:** ¿qué se pidió exactamente? ¿Faltaba información de la regla de negocio?
+- **Qué se revisó realmente:** ¿hubo lectura línea por línea, tests propios, prueba manual? ¿Quién aprobó?
+- **Comprensión:** ¿el equipo hoy puede explicar qué hace ese cambio y qué casos no cubre?
+- **Casos no contemplados:** ¿qué situaciones borde o de excepción no se consideraron?
+
+## 6. Factores contribuyentes (el entorno)
+
+¿Qué elementos del entorno o de las herramientas facilitaron que el error ocurriera?
+
+- **Falta de visibilidad:** el monitoreo no reflejó la saturación de conexiones de inmediato.
+- **Documentación desactualizada:** el manual de despliegue no mencionaba las dependencias de esa variable.
+- **Presión de plazos o de métricas:** (completar si corresponde).
+
+## 7. Dónde tuvimos suerte y qué todavía no sabemos
+
+- **Suerte:** ¿qué pudo haber salido peor y no salió? (ej.: el incidente ocurrió fuera de la hora pico).
+- **Incógnitas:** ¿qué preguntas quedan abiertas? ¿Qué no podemos explicar todavía?
+
+## 8. Plan de acción y mitigación
+
+Tareas concretas, **con responsable y fecha**, para que el sistema sea más robusto. **Ninguna acción puede ser "que el desarrollador tenga más cuidado".**
+
+| Acción preventiva o correctiva | Dueño | Prioridad (Alta / Media / Baja) | Fecha objetivo | Ticket |
+|---|---|---|---|---|
+| Automatizar la validación de variables en el pipeline de CI/CD | [rol o nombre] | Alta | DD/MM | PROD-1234 |
+| Configurar alertas específicas para el pool de conexiones de la base de datos | [rol o nombre] | Media | DD/MM | PROD-1235 |
+| Actualizar la documentación de arquitectura del módulo de pagos | [rol o nombre] | Baja | DD/MM | PROD-1236 |
+
+## 9. Aprendizaje a compartir
+
+Una o dos frases que el equipo pueda llevarse, redactadas sin nombres propios y publicables.
+
+---
+
+*Un post-mortem sin acciones cerradas es un ritual vacío. Revisar el estado de la tabla de la sección 8 en la siguiente retrospectiva.*
+</script>
+</body>
+</html>

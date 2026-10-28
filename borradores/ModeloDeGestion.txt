@@ -1,0 +1,106 @@
+Paper para discutir y evaluar el modelo de gestion de equipos de desarrollo de software ante la irrupción del desarrollo mediante IAs
+
+Hipótesis/Introducción:
+
+Como el código viaja a mayor velocidad de lo que se puede evaluar, analizar y revisar (sea en el debug propio del desarrollador, en test -orientados al camino perfecto por las IAs-, o en los PRs que en realidad no se revisan exhaustivamente sino que sólo se hace una lectura en diagonal y se verifica que compile) se suele trasladar a las aplicaciones en producción ese momento de análisis previo, caminos posibles, situaciones borde, etc.
+Esto genera un mayor número de problemas en las aplicaciones una vez YA en producción (tal como señala Ariel Fabian en su publicación del Efecto Bullet (link)).
+
+
+El desafío es, desde la gestión de los equipos de desarrollo, generar un entorno de revisión, re-think, cooperación y disclosure de lo que se sabe y lo que no del modelo/arquitectura/funcionalidades del desarrollo que se está llevando a cabo.
+A la vez, hacer todo lo posible para evitar la deuda cognitiva de utilizar código que no se comprende y/o no se revisó generando la ausencia de propósito arquitectónico, donde los equipos desarrollan y dan soporte a sistemas construidos muy velozmente pero que nadie comprende ni es "dueño". Y mucho menos uno -tanto como desarrollador o manager de desarrollo- puede hacerse responsable: "fue un error de la IA" no puede ser un argumento para justificar/explicar un bug.
+
+Para lograr ese entorno amigable con el error y lo que se desconoce -teniendo como referencia las actitudes metodológicas necesarias en ambientes de aprendizaje- se debe considerar como estrategia fundamental aceptar, valorar y discutir el error. No justificarse ni defenderse, explicarlo. No sólo en lo funcional, sino en la lógica que nos hizo generarlo.
+Utilizando estas teorías del aprendizaje, donde el error es parte del proceso de construcción del conocimiento, el error debe ser un objeto de reflexión, no necesariamente es una falla ni un fracaso, sino muy probablemente: evidencia de una hipótesis en crisis -la lógica detrás del error-.
+
+Se deben tener en cuenta los varios posibles orígenes del error: un prompt mal formulado, problemas en el análisis de la situación (regla de negocio) que el software debe resolver/cumplir, situaciones de borde no contempladas, entornos que por diferentes cuestiones dan condiciones de excepción (sin conectividad, caídas de DB, etc), infraestructura de la solución/proyecto que no soportan adecuadamente los requerimientos, etc.
+Sólo valorando y aceptando el error nos permitiríamos comprender el modelo y los flujos del software en las distintas secciones y funcionalidades en acción.
+Esto nos permite, incluso, anticipar con mayor precisión potenciales problemas y diagnosticar más eficazmente otros errores que puedan surgir.
+
+Existen varios "estilos" en la conducción de equipos de desarrollo, los que buscan al responsable del error/problema, los que no dan relevancia a eso pero miden la "productividad" de un desarrollador a partir de esos parámetros... los errores que comete.
+Hay que insistir: no alcanza una actitud de "no importa quién se equivocó, no busco responsables sino soluciones", esta actitud -de alguna manera- oculta o vela el error en función de la solución; no necesariamente "enseña" o explica algo del desarrollo o del porqué del error.
+
+
+En este dispositivo (Foucault - Microfísica del poder) de desarrollo, ambiente en donde no se castigue ni se invisibilice el error son importantes varias cuestiones: algunas de ellas habilidades blandas que deben ser importantes en el ambiente/contexto diario.
+
+Excesos en el control con reuniones permanentes donde se debe dar cuenta de todo con avances y demoras también suelen generar que se "escondan" los problemas o se genere código que "salva" la situación que se ve pero que no se sabe con precisión qué hace y mucho menos, que otros inconvenientes puede traer.
+Un modelo de panóptico -Foucault (Vigilar y Castigar)- (con aplicaciones corriendo en backgound, reuniones permanentes, etc) permite vigilar y controlar pero se convierte en un principio disciplinario. Este mismo esquema así como se aplica a escuelas, hospitales, fábricas y cuarteles, busca ordenar, corregir y normalizar las conductas donde el "control" incluso se internaliza; como nunca se sabe con certeza si se está siendo observado/revisado en ese momento, terminamos por comportarnos como si siempre se nos vigilara. 
+El concepto de panóptico digital -Byung-Chul Han (Psicopolítica)- nos deja claro que a diferencia del modelo clásico, físico y arquitectónico, el panóptico digital funciona de una manera mucho más sutil y eficaz. 
+Este tipo de conducción de equipos puede parecer "eficiente" pero, al no revisar, repensar y evaluar los errores abiertamente, no como algo culposo sino como algo ineludible -y de valor- termina por generar código que hoy funciona pero mañana no sabemos. Además de un efecto burnout en los desarrolladores.
+
+
+Las herramientas de desarrollo como elementos del dispositivo de vigilancia
+
+Las aplicaciones que corren en background (segundo plano) y los flujos de trabajo hiperconectados replican de forma exacta los principios foucaultianos:
+
+* El estado de presencia constante (Teams/Discord): Los indicadores de estado ("Disponible", "Ausente", "En una reunión") funcionan como las ventanas iluminadas de las celdas de Bentham. El desarrollador sabe que su disponibilidad es visible para líderes y compañeros en tiempo real, lo que genera la presión de estar "siempre activo" (moverse para que el estado no cambie a ausente).
+
+* Las reuniones permanentes (Daily extendidas y pair programming forzado): La insistencia en canales de voz abiertos de forma continua (estilo Discord o Gather) transforma el espacio de trabajo en una celda abierta. La justificación técnica es la "colaboración orgánica permanente", pero el efecto colateral es la exposición total del tiempo y el ritmo de pensamiento del programador (y sus posibles errores). 
+
+* El panóptico en el código (Git/Jira): Más allá de la comunicación, el control se automatiza. El historial de commits en GitHub/GitLab (frecuencia, líneas de código, hora de entrega) y las métricas de Jira (tiempo por tarea, burndown charts) actúan como registros biométricos del rendimiento. El algoritmo evalúa constantemente la conducta productiva. Importan más la cantidad de commits o PRs que la decisión arquitectónica de cómo organizar los mismos de manera que sean más comprensibles y revisables.
+
+Este tipo de entornos alteran la naturaleza del trabajo intelectual y del desarrollador. 
+Programar requiere abstracción y sobre todo, comprensión del problema tratado; el panóptico digital exige visibilidad y ruido comunicativo.
+
+Consecuencias en los equipos de desarrollo: interiorización del control (invisibilización de los errores)
+
+La consecuencia más profunda no es el posible castigo, sino la autocensura. 
+En el desarrollo de software, esto se refleja en comportamientos específicos:
+
+* Teatralidad de la productividad: El desarrollador prioriza tareas visibles (mover tarjetas en Jira, enviar mensajes en canales públicos) por encima del trabajo profundo (deep work) o la resolución de problemas complejos que requieren tiempo de desconexión y pensamiento.
+
+* Ansiedad de disponibilidad: El temor a aparecer como "Ausente" fragmenta la atención. El programador interrumpe su flujo de desarrollo para responder alertas de chat inmediatamente, sacrificando la calidad del código para validar su presencia.
+
+* La ilusión de autonomía: Las metodologías ágiles (Scrum/Agile) se presentan como marcos de autoorganización y libertad. Sin embargo, al depender de un monitoreo de datos tan estricto y de reuniones constantes, la autonomía se convierte en una autovigilancia coordinada: el equipo se disciplina a sí mismo para cumplir con la métrica del tablero.
+
+
+
+El conflicto Técnico-Filosófico
+
+La utilización de estas herramientas de control generan, a pesar del propósito técnico "oficial", una serie de efectos reales:
+
+Aplicaciones en Background 	-->		Facilitar la comunicación inmediata y resolver bloqueos.	--> 	Monitoreo del tiempo de inactividad de la pantalla.
+Canales de Voz Permanentes 	-->		Simular la cercanía de la oficina física en remoto.	        --> 	Eliminación de la privacidad y el espacio de concentración.
+Métricas de Repos (Git)		-->		Medir la estabilidad y avance del proyecto. 				-->		Cuantificación matemática del esfuerzo humano.
+
+
+
+Alternativas posibles:
+
+La gestión de los equipos de desarrollo debe pasar de una cultura del monitoreo de presencia a una cultura del impacto y la seguridad psicológica. 
+En el software, el error no es una falla del programador; es un subproducto inevitable de la exploración, intentos de solución de problemas e innovación.
+
+La idea es que al aplicar algunas de estas estrategias, la gestión deja de actuar como la torre central de vigilancia del panóptico clásico y se transforma en un facilitador de infraestructura y confianza, permitiendo que el desarrollo de software vuelva a ser una disciplina creativa e iterativa. 
+
+
+
+Tres alternativas/estrategias posibles:
+
+1. Reconfigurar la Comunicación y la "Presencia"
+
+* Soberanía del estado de disponibilidad: Implementar una política oficial de "No Indicators". Permitir y normalizar que los desarrolladores cierren Teams/Discord o configuren su estado en "No molestar" durante bloques de 3 o 4 horas para fomentar el deep work (trabajo profundo).
+
+* Migración a la comunicación asíncrona: Establecer que las respuestas a mensajes de chat pueden demorar hasta 1 o 2 horas sin que esto signifique una falta de compromiso. Si algo es realmente urgente, se define un canal de escalamiento específico (como una llamada telefónica).
+
+* Eliminar las salas de voz permanentes: Reemplazar los canales de voz abiertos todo el día por "horas de oficina" acotadas (ej. 30 minutos al inicio o final del día) o salas de diseño puntuales. La colaboración debe ser un acto consciente, no una exposición continua.
+
+
+2. Redefinir las Métricas de Control
+
+* Métricas de impacto, no de actividad: evitar uso de líneas de código escritas, horas conectados o cantidad de commits como evaluación de rendimiento. Medir el éxito en función del valor entregado al usuario, la estabilidad del sistema y el cumplimiento de los objetivos del sprint. Y sobre todo, la comprensión técnica de los aportes al sistema.
+
+* El tablero Jira como mapa, no como látigo: Modificar el uso de estas herramientas. Deben servir para que el equipo coordine sus dependencias, no para que el mánager microgestione los minutos de cada tarea. Si una tarjeta se retrasa, la pregunta de gestión debe ser "¿Cómo te ayudo a destrabarlo?" en lugar de "¿Por qué tardaste más?". E incluso, si esa traba se identifica como un dato relevante al sistema, ahí sí, analizar a fondo y luego -al tiempo de solucionarlo- compartir el hallazgo con el equipo.
+
+
+Y quizás lo más importante:
+
+3. Institucionalizar el Error como proceso natural
+
+Para que el equipo deje de ocultar los fallos por temor a la vigilancia, el error debe ser visible, analizado y entendido como fuente de mejora:
+
+* Post-mortems sin culpa (Blameless Post-Mortems): Cuando ocurre un fallo grave en producción o un bug crítico, la reunión de análisis debe centrarse en cómo y porqué falló el sistema, no en quién cometió el error. El objetivo es identificar fallas en los procesos, la falta de pruebas automatizadas o la ambigüedad en los requerimientos.
+
+* Entornos de experimentación seguros (Sandboxes): Fomentar la creación de ambientes locales o de staging robustos donde romper el código sea económico y seguro. Si el desarrollador sabe que un error en su rama de desarrollo no tiene consecuencias punitivas ni exposición pública negativa, arriesgará más en buscar mejores soluciones arquitectónicas.
+
+* Sesiones de "Fail-Faire" o Compartir Aprendizajes: Crear espacios mensuales donde los líderes técnicos y desarrolladores senior expongan sus peores errores recientes y qué aprendieron de ellos. Ver a los referentes vulnerables destruye la ilusión panóptica de la perfección obligatoria.
+
+

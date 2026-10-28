@@ -1,0 +1,27 @@
+Parte 2: Pautas para la Nueva Dinámica de las Dailys (Sin Panóptico)
+
+El propósito de la Daily según Scrum es inspeccionar el progreso hacia el objetivo del Sprint y adaptar el plan. No es un reporte de horas trabajadas para el mánager.
+Para romper la sensación de vigilancia, implementa las siguientes reglas de juego:
+
+1. Cambiar las 3 preguntas tradicionales
+
+Las preguntas clásicas ("¿Qué hice ayer? ¿Qué haré hoy? ¿Tengo bloqueos?") se sienten como un juicio diario. Reemplázalas por un enfoque centrado en el tablero y el producto, no en la persona:
+• Enfoque antiguo: "Juan, cuéntanos qué hiciste ayer".
+• Enfoque nuevo (Caminar el tablero de derecha a izquierda): "Miremos esta tarea que está en Testing. ¿Qué falta para que pase a Done? ¿Alguien necesita ayuda con eso?".
+• El equipo habla de las tarjetas, no de sus agendas personales.
+
+2. El mánager o Scrum Master es un facilitador, no un juez
+
+• Evitar el contacto visual de reporte: Durante la reunión, los desarrolladores deben hablarse entre ellos, no mirar fijamente al mánager esperando aprobación.
+• Intervención mínima: El facilitador solo interviene si el equipo se desvía del objetivo técnico o si detecta un bloqueo que requiere gestión externa.
+• Prohibido pedir justificaciones: Si una tarea no avanzó, la pregunta nunca es "¿Por qué no la terminaste?", sino "¿Surgió alguna complejidad técnica imprevista en esa tarjeta con la que podamos colaborar?".
+
+3. Regla de los 15 minutos y "El Estacionamiento" (Parking Lot)
+
+• La Daily debe ser estricta con el tiempo (máximo 15 minutos). Esto evita que se convierta en una reunión de debate largo donde se expone el conocimiento de cada uno bajo presión.
+• Si un problema técnico requiere discusión profunda, se dice: "Esto va al estacionamiento".
+• Al finalizar los 15 minutos, la Daily termina oficialmente. Quienes no estén involucrados en el tema del "estacionamiento" se pueden retirar libremente para proteger su tiempo de foco.
+
+4. Desconectar los indicadores de presencia inmediatamente después
+
+• Establecer como norma del equipo que, una vez terminada la Daily, los desarrolladores tienen total libertad de cerrar sus aplicaciones de mensajería (o ponerse en "No molestar") para entrar en bloques de desarrollo sin interrupciones. La Daily fue el único punto de sincronización síncrona requerido.
