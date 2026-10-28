@@ -120,8 +120,9 @@ Aplicado al desarrollo con IA, esto se traduce en una regla concreta:
 
 La regla no castiga el error: **señala la opacidad**. Si alguien no puede explicar un cambio, lo esperable no es una sanción sino una reparación: leerlo entre varios, escribir la prueba que falta o deshacer el cambio. Lo que se cuida es la comprensión del equipo, no la reputación de nadie.
 
-Esto no quiere decir que desconozca que existen conductas que ninguna cultura sana ampara, como la negligencia deliberada; la dejo fuera de este trabajo. Lo que sí propongo es una precaución antes de señalar a alguien: preguntarse si el sistema premia esa conducta. 
-Quien aprueba un PR sin leerlo en un entorno donde se miden los PRs cerrados por semana no está violando las reglas: las está cumpliendo.
+Esto no quiere decir que desconozca que existen conductas que ninguna cultura sana ampara, como la negligencia deliberada; la dejo fuera de este trabajo. Lo que sí propongo es una precaución antes de señalar a alguien: preguntarse si el sistema premia esa conducta.
+
+> Quien aprueba un PR sin leerlo en un entorno donde se miden los PRs cerrados por semana no está violando las reglas: las está cumpliendo.
 
 Por último, hay una irresponsabilidad que esta cultura sí quiere eliminar: **ocultar el error**. Quien lo oculta no se hace cargo ni de la falla ni de lo que el equipo podría aprender de ella. Por eso la seguridad psicológica no es lo opuesto de la responsabilidad: es lo que la hace posible.
 
