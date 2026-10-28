@@ -25,9 +25,12 @@ ROOT = Path(__file__).parent
 SRC = ROOT / "fuentes"
 
 PAGINAS = {
-    "paper": {"archivo": "index.html", "fuente": "paper.md", "nav": "Paper"},
-    "a": {"archivo": "anexo-a.html", "fuente": "anexo-a-postmortem.md", "nav": "Anexo A"},
-    "b": {"archivo": "anexo-b.html", "fuente": "anexo-b-dailys.md", "nav": "Anexo B"},
+    "paper": {"archivo": "index.html", "fuente": "paper.md", "nav": "Paper",
+              "pdf": "descargas/ErrorValor-IA_Paper.pdf"},
+    "a": {"archivo": "anexo-a.html", "fuente": "anexo-a-postmortem.md", "nav": "Anexo A",
+          "pdf": "descargas/ErrorValor-IA_Anexo-A_Post-mortem-sin-culpa.pdf"},
+    "b": {"archivo": "anexo-b.html", "fuente": "anexo-b-dailys.md", "nav": "Anexo B",
+          "pdf": "descargas/ErrorValor-IA_Anexo-B_Dailys-sin-vigilancia.pdf"},
 }
 
 DESC_PAPER = ("Con la IA escribimos código más rápido de lo que podemos entenderlo. "
@@ -159,16 +162,31 @@ def separar_cabecera(texto):
     return h1, autor, version, resto.strip("\n")
 
 
-def procesar_cuerpo(cuerpo_html, autolink_anexos):
-    # tablas con contenedor desplazable
-    cuerpo_html = re.sub(r"<table>", '<div class="tabla" tabindex="0" role="region" aria-label="Tabla"><table>', cuerpo_html)
-    cuerpo_html = cuerpo_html.replace("</table>", "</table></div>")
+def procesar_cuerpo(cuerpo_html, autolink_anexos, editorial=False):
+    # tablas: contenedor desplazable y, si tienen 3 columnas o más, etiquetas para apilarlas en el móvil
+    def preparar_tabla(m):
+        t = m.group(0)
+        cabeceras = [re.sub(r"<[^>]+>", "", h).strip() for h in re.findall(r"<th[^>]*>(.*?)</th>", t, flags=re.S)]
+        apilable = len(cabeceras) >= 3
+        if apilable:
+            def etiquetar_fila(mf):
+                celdas = iter(cabeceras)
+                return re.sub(r"<td([^>]*)>",
+                              lambda mc: f'<td{mc.group(1)} data-label="{esc(next(celdas, ""))}">', mf.group(0))
+            cuerpo = re.search(r"<tbody>.*?</tbody>", t, flags=re.S)
+            if cuerpo:
+                t = t.replace(cuerpo.group(0), re.sub(r"<tr>.*?</tr>", etiquetar_fila, cuerpo.group(0), flags=re.S))
+        clase = "tabla apilable" if apilable else "tabla"
+        return f'<div class="{clase}" tabindex="0" role="region" aria-label="Tabla">{t}</div>'
+    cuerpo_html = re.sub(r"<table>.*?</table>", preparar_tabla, cuerpo_html, flags=re.S)
 
     # citas: tres usos
     def clasificar(m):
         inner = m.group(1)
         txt = re.sub(r"<[^>]+>", "", inner).strip()
-        if txt.startswith("Quien aprueba se hace responsable"):
+        if not editorial:
+            cls = ""
+        elif txt.startswith("Quien aprueba se hace responsable"):
             cls = "regla"
         elif inner.lstrip().startswith("<p><strong>Una aclaración") or inner.lstrip().startswith("<p><strong>Alcance"):
             cls = "nota"
@@ -332,7 +350,7 @@ def construir():
     h1, autor, version, resto = separar_cabecera(texto)
     principal, _, sub = h1.partition(":")
     sub = sub.strip()
-    cuerpo_html, entradas = procesar_cuerpo(md_a_html(resto), autolink_anexos=True)
+    cuerpo_html, entradas = procesar_cuerpo(md_a_html(resto), autolink_anexos=True, editorial=True)
     ficha = ""
     if autor or version:
         ficha = '<dl class="ficha">'
@@ -346,6 +364,9 @@ def construir():
     <h1 id="titulo">{esc(principal.strip())}</h1>
     {f'<p class="subtitulo">{esc(sub)}</p>' if sub else ''}
     {ficha}
+    <div class="acciones">
+      <a class="boton principal" href="{PAGINAS['paper']['pdf']}" download>Descargar PDF</a>
+    </div>
   </div>
   <figure class="figura-panoptico">
     {svg_panoptico()}
@@ -363,13 +384,12 @@ def construir():
         h1, _, _, resto = separar_cabecera(texto)
         cuerpo_html, entradas = procesar_cuerpo(md_a_html(resto), autolink_anexos=False)
         cuerpo = f'<div class="hoja">{cuerpo_html}</div>'
-        archivo_md = p["fuente"]
         hero = f"""<section class="encabezado-anexo" aria-labelledby="titulo">
   <h1 id="titulo">{esc(h1)}</h1>
   <p>{esc(desc)}</p>
   <div class="acciones">
-    <button class="boton principal" id="boton-copiar" type="button">Copiar en Markdown</button>
-    <a class="boton" href="fuentes/{archivo_md}" download>Descargar .md</a>
+    <a class="boton principal" href="{p['pdf']}" download>Descargar PDF</a>
+    <button class="boton" id="boton-copiar" type="button">Copiar plantilla</button>
     <span class="estado" id="estado-copia" role="status" aria-live="polite"></span>
   </div>
 </section>"""

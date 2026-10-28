@@ -40,8 +40,8 @@
   <h1 id="titulo">Anexo A. Plantilla de post-mortem sin culpa</h1>
   <p>Plantilla para analizar un incidente sin buscar culpables. Copiala, completala con el equipo y guardala junto al ticket.</p>
   <div class="acciones">
-    <button class="boton principal" id="boton-copiar" type="button">Copiar en Markdown</button>
-    <a class="boton" href="fuentes/anexo-a-postmortem.md" download>Descargar .md</a>
+    <a class="boton principal" href="descargas/ErrorValor-IA_Anexo-A_Post-mortem-sin-culpa.pdf" download>Descargar PDF</a>
+    <button class="boton" id="boton-copiar" type="button">Copiar plantilla</button>
     <span class="estado" id="estado-copia" role="status" aria-live="polite"></span>
   </div>
 </section>
@@ -79,7 +79,7 @@
 </tbody>
 </table></div>
 </section><section id="seccion-1"><h2 id="seccion-1"><span class="num">1</span>Directiva Primaria</h2>
-<blockquote class="tesis">
+<blockquote>
 <p>“Independientemente de lo que descubramos hoy, se parte de la premisa de que todos hicieron el mejor trabajo posible con la información, las herramientas, el tiempo y los recursos disponibles en ese momento.”</p>
 </blockquote>
 <p><em>Adaptada de la “Directiva Primaria” de las retrospectivas (Norm Kerth, 2001).</em></p>
@@ -130,7 +130,7 @@
 </ul>
 </section><section id="seccion-8"><h2 id="seccion-8"><span class="num">8</span>Plan de acción y mitigación</h2>
 <p>Tareas concretas, <strong>con responsable y fecha</strong>, para que el sistema sea más robusto. <strong>Ninguna acción puede ser “que el desarrollador tenga más cuidado”.</strong></p>
-<div class="tabla" tabindex="0" role="region" aria-label="Tabla"><table>
+<div class="tabla apilable" tabindex="0" role="region" aria-label="Tabla"><table>
 <thead>
 <tr>
 <th>Acción preventiva o correctiva</th>
@@ -142,25 +142,25 @@
 </thead>
 <tbody>
 <tr>
-<td>Automatizar la validación de variables en el pipeline de CI/CD</td>
-<td>[rol o nombre]</td>
-<td>Alta</td>
-<td>DD/MM</td>
-<td>PROD-1234</td>
+<td data-label="Acción preventiva o correctiva">Automatizar la validación de variables en el pipeline de CI/CD</td>
+<td data-label="Dueño">[rol o nombre]</td>
+<td data-label="Prioridad (Alta / Media / Baja)">Alta</td>
+<td data-label="Fecha objetivo">DD/MM</td>
+<td data-label="Ticket">PROD-1234</td>
 </tr>
 <tr>
-<td>Configurar alertas específicas para el pool de conexiones de la base de datos</td>
-<td>[rol o nombre]</td>
-<td>Media</td>
-<td>DD/MM</td>
-<td>PROD-1235</td>
+<td data-label="Acción preventiva o correctiva">Configurar alertas específicas para el pool de conexiones de la base de datos</td>
+<td data-label="Dueño">[rol o nombre]</td>
+<td data-label="Prioridad (Alta / Media / Baja)">Media</td>
+<td data-label="Fecha objetivo">DD/MM</td>
+<td data-label="Ticket">PROD-1235</td>
 </tr>
 <tr>
-<td>Actualizar la documentación de arquitectura del módulo de pagos</td>
-<td>[rol o nombre]</td>
-<td>Baja</td>
-<td>DD/MM</td>
-<td>PROD-1236</td>
+<td data-label="Acción preventiva o correctiva">Actualizar la documentación de arquitectura del módulo de pagos</td>
+<td data-label="Dueño">[rol o nombre]</td>
+<td data-label="Prioridad (Alta / Media / Baja)">Baja</td>
+<td data-label="Fecha objetivo">DD/MM</td>
+<td data-label="Ticket">PROD-1236</td>
 </tr>
 </tbody>
 </table></div>

@@ -1,0 +1,10 @@
+# GitHub Pages publica solo lo que no está excluido acá.
+# Los Markdown de trabajo, los borradores y las herramientas quedan en el repositorio
+# pero no se sirven en el sitio.
+exclude:
+  - fuentes
+  - borradores
+  - tools
+  - build.py
+  - README.md
+  - assets/og-fuente.html
