@@ -16,4 +16,4 @@ Resumen en español:   https://creativecommons.org/licenses/by/4.0/deed.es
 
 Excepciones: las citas y obras de terceros mencionadas en el texto conservan sus propios derechos.
 Las tipografías de assets/fonts/ se rigen por la SIL Open Font License 1.1 (ver sus archivos de licencia).
-El código del sitio no tiene licencia definida por el momento.
+El código del sitio (build.py, tools/, assets/style.css, assets/site.js) se rige por la licencia MIT (ver LICENSE-CODE).

@@ -60,4 +60,8 @@ adecuado a Martín Dopazo, indiques el enlace a la licencia y señales si hicist
 Ver [LICENSE](LICENSE).
 
 La licencia cubre el texto propio. Las citas y obras de terceros mencionadas (Fabian, Foucault, Han, etc.)
-conservan sus propios derechos. El código del sitio (`build.py`, `tools/`, `assets/`) todavía no tiene licencia definida.
+conservan sus propios derechos. 
+## Licencia del código
+
+El código que genera el sitio (`build.py`, `tools/`, `assets/style.css`, `assets/site.js`) se publica bajo
+[licencia MIT](LICENSE-CODE). Las tipografías de `assets/fonts/` siguen bajo su propia licencia (OFL 1.1).
