@@ -28,7 +28,7 @@ PDFS = [
 PIE = """
 <div style="width:100%;font-family:Arial,sans-serif;font-size:8px;color:#4a5a60;padding:0 17mm;
             display:flex;justify-content:space-between;">
-  <span>Martín Dopazo · ErrorValor-IA · {titulo}</span>
+  <span>Martín Dopazo · ErrorValor-IA · {titulo} · CC BY 4.0</span>
   <span><span class="pageNumber"></span> / <span class="totalPages"></span></span>
 </div>
 """

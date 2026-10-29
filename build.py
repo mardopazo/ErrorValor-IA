@@ -333,6 +333,7 @@ def pagina(clave, titulo_doc, descripcion, hero, cuerpo, entradas, extra_scripts
 <footer class="pie">
   <div>
     <p>{esc(AUTOR)}. Este texto es un borrador en revisión: se puede discutir, corregir y mejorar.</p>
+    <p>Contenido bajo licencia <a href="https://creativecommons.org/licenses/by/4.0/deed.es" rel="license noopener">Creative Commons Atribución 4.0 (CC BY 4.0)</a>: podés copiarlo, adaptarlo y compartirlo, incluso con fines comerciales, citando a {esc(AUTOR)} y este sitio.</p>
     <p><a href="{REPO_URL}" rel="noopener">Código y fuentes en GitHub</a></p>
   </div>
 </footer>

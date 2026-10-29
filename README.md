@@ -53,4 +53,11 @@ Archivo y Literata, incluidas en `assets/fonts/` bajo licencia SIL Open Font Lic
 
 ## Licencia del contenido
 
-Pendiente de definir.
+El paper y los dos anexos (post-mortem sin culpa y dailys sin vigilancia) se publican bajo
+[Creative Commons Atribución 4.0 Internacional (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.es).
+Podés copiar, redistribuir y adaptar el material, incluso con fines comerciales, siempre que des crédito
+adecuado a Martín Dopazo, indiques el enlace a la licencia y señales si hiciste cambios.
+Ver [LICENSE](LICENSE).
+
+La licencia cubre el texto propio. Las citas y obras de terceros mencionadas (Fabian, Foucault, Han, etc.)
+conservan sus propios derechos. El código del sitio (`build.py`, `tools/`, `assets/`) todavía no tiene licencia definida.
