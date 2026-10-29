@@ -80,14 +80,14 @@ Esto ya está pasando. Según reportó la prensa especializada, Meta llegó a in
 Lo más profundo no es el castigo posible sino la **autocensura**. En el desarrollo de software se ve en comportamientos muy concretos:
 
 - **Teatralidad de la productividad.** Se priorizan las tareas visibles (mover tarjetas, escribir en canales públicos) sobre el trabajo profundo (*deep work*) y los problemas complejos, que necesitan tiempo de desconexión.
-- **Ansiedad de disponibilidad.** El miedo a aparecer como "Ausente" fragmenta la atención: cortamos el flujo para contestar alertas y sacrificamos calidad de código para demostrar presencia.
+- **Ansiedad de disponibilidad.** El miedo a aparecer como "Ausente" fragmenta la atención: se corta el flujo para contestar alertas y se sacrifica calidad de código para demostrar presencia.
 - **Ilusión de autonomía.** Las metodologías ágiles se presentan como marcos de autoorganización, pero si dependen de un monitoreo estricto de datos y de reuniones constantes, la autonomía se vuelve **autovigilancia coordinada**: el equipo se disciplina solo para cumplir con la métrica del tablero.
 
-Programar requiere abstracción y, sobre todo, entender el problema. El panóptico digital pide otra cosa: visibilidad y ruido comunicativo. El resultado es código que hoy funciona y que mañana no sabemos explicar, más un desgaste (burnout) que se paga en las personas.
+Programar requiere abstracción y, sobre todo, entender el problema. El panóptico digital pide otra cosa: visibilidad y ruido comunicativo. El resultado es código que hoy funciona y que mañana nadie sabe explicar, más un desgaste (burnout) que se paga en las personas.
 
 ## 4. El error como objeto de conocimiento
 
-Para armar un entorno amigable con el error y con lo que no sabemos, me apoyo en las actitudes de los ambientes de aprendizaje. En las teorías del aprendizaje el error es parte del proceso de construir conocimiento. No es necesariamente una falla ni un fracaso: es, muy probablemente, **evidencia de una hipótesis en crisis**, la lógica que está detrás del error.
+Para armar un entorno amigable con el error y con lo que no sabemos, me apoyo en el **constructivismo**, la corriente de las teorías del aprendizaje según la cual el conocimiento no se recibe hecho sino que se construye, y el error es parte de ese proceso. Emilia Ferreiro, discípula de Piaget, lo mostró con el aprendizaje de la escritura: lo que desde afuera parece un error de los niños son hipótesis propias y coherentes, que van revisando hasta acercarse a la convención (Ferreiro y Teberosky, 1979). Un error no es necesariamente una falla ni un fracaso: es, muy probablemente, **evidencia de una hipótesis en crisis**, la lógica que está detrás del error.
 
 La estrategia de fondo es **aceptar, valorar y discutir** el error: no justificarse ni defenderse, sino explicarlo. Y no solo lo funcional, sino **la lógica que nos llevó a producirlo**.
 
@@ -223,6 +223,7 @@ La velocidad de la IA no va a frenar. Lo que sí depende de quienes gestionamos 
 - Han, B.-C. *La sociedad del cansancio.*
 - Dekker, S. *Just Culture: Balancing Safety and Accountability.* (Ashgate Publishing, 2007)
 - Allspaw, J. (2012). Blameless PostMortems and a Just Culture. Etsy, Code as Craft. (https://www.etsy.com/pl/codeascraft/blameless-postmortems)
+- Ferreiro, E. y Teberosky, A. (1979). *Los sistemas de escritura en el desarrollo del niño.* Siglo XXI.
 - Edmondson, A. (1999). Psychological safety and learning behavior in work teams. *Administrative Science Quarterly.*
 - Kerth, N. (2001). *Project Retrospectives: A Handbook for Team Reviews.* (Directiva Primaria.)
 - DORA / *Accelerate* (Forsgren, Humble y Kim).
