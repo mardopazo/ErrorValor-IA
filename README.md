@@ -11,10 +11,10 @@ Sitio: https://mardopazo.github.io/ErrorValor-IA/ (español) · https://mardopaz
 | Ruta | Contenido |
 |---|---|
 | `index.html` | El paper (español) |
-| `en/index.html` | The paper (English). Los anexos todavía existen solo en español |
+| `en/index.html`, `en/annex-a.html`, `en/annex-b.html` | The paper and its annexes (English) |
 | `anexo-a.html` | Anexo A. Plantilla de post-mortem sin culpa |
 | `anexo-b.html` | Anexo B. Pautas para dailys sin vigilancia |
-| `fuentes/` | Los textos en Markdown (`paper.md` en español, `paper.en.md` en inglés). **Es lo que se edita.** |
+| `fuentes/` | Los textos en Markdown (`paper.md`, `anexo-a-postmortem.md`, `anexo-b-dailys.md` en español; los mismos con extensión `.en.md` en inglés). **Es lo que se edita.** |
 | `descargas/` | PDF del paper (español e inglés) y de los anexos |
 | `assets/` | Estilos, script, tipografías, imagen para compartir |
 | `borradores/` | Versiones anteriores y notas de revisión |
@@ -24,7 +24,7 @@ Sitio: https://mardopazo.github.io/ErrorValor-IA/ (español) · https://mardopaz
 
 ## Cómo se actualiza
 
-1. Editar los archivos de `fuentes/`. Si se cambia `paper.md`, hay que reflejar el cambio en `paper.en.md` para que las dos versiones no se desincronicen.
+1. Editar los archivos de `fuentes/`. Si se cambia un texto en un idioma, hay que reflejar el cambio en el otro para que las versiones no se desincronicen.
 2. Regenerar las páginas:
 
    ```

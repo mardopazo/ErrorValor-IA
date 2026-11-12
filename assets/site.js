@@ -80,7 +80,7 @@
       var texto = fuente.textContent.replace(/^\n/, "");
       function listo(ok) {
         if (estado) {
-          estado.textContent = ok ? "Copiado al portapapeles." : "No se pudo copiar. Usá «Descargar .md».";
+          estado.textContent = ok ? (botonCopiar.getAttribute("data-ok") || "Copiado al portapapeles.") : (botonCopiar.getAttribute("data-error") || "No se pudo copiar.");
           window.setTimeout(function () { estado.textContent = ""; }, 3500);
         }
       }

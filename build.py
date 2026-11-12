@@ -29,6 +29,10 @@ PAGINAS = {
               "pdf": "descargas/ErrorValor-IA_Paper.pdf"},
     "paper_en": {"archivo": "en/index.html", "fuente": "paper.en.md", "nav": "Paper", "idioma": "en",
                  "pdf": "descargas/ErrorValor-IA_Paper_EN.pdf"},
+    "a_en": {"archivo": "en/annex-a.html", "fuente": "anexo-a-postmortem.en.md", "nav": "Annex A", "idioma": "en",
+             "pdf": "descargas/ErrorValor-IA_Annex-A_Blameless-post-mortem.pdf"},
+    "b_en": {"archivo": "en/annex-b.html", "fuente": "anexo-b-dailys.en.md", "nav": "Annex B", "idioma": "en",
+             "pdf": "descargas/ErrorValor-IA_Annex-B_Dailies-without-surveillance.pdf"},
     "a": {"archivo": "anexo-a.html", "fuente": "anexo-a-postmortem.md", "nav": "Anexo A",
           "pdf": "descargas/ErrorValor-IA_Anexo-A_Post-mortem-sin-culpa.pdf"},
     "b": {"archivo": "anexo-b.html", "fuente": "anexo-b-dailys.md", "nav": "Anexo B",
@@ -56,10 +60,15 @@ IDIOMAS = {
                        "Un modelo de gestión para equipos de desarrollo donde el error se ve, se discute y se aprende."),
         "regla": "Quien aprueba se hace responsable", "notas": ("Una aclaración", "Alcance"),
         "anexo_palabra": "Anexo", "cabecera_autor": "Autor", "cabecera_version": "Versión", "refs": "referencias",
+        "copiar": "Copiar plantilla", "copiado": "Copiado al portapapeles.",
+        "copiar_error": "No se pudo copiar. Seleccioná el texto a mano.",
+        "desc_a": ("Plantilla para analizar un incidente sin buscar culpables. Copiala, completala con el equipo "
+                   "y guardala junto al ticket."),
+        "desc_b": "Reglas de juego para que la daily coordine el trabajo del equipo en lugar de controlar a las personas.",
     },
     "en": {
         "html_lang": "en", "og_locale": "en_US", "prefijo": "../", "carpeta": "en/",
-        "nav": {"paper": "Paper", "a": "Annex A (ES)", "b": "Annex B (ES)", "repo": "Repository"},
+        "nav": {"paper": "Paper", "a": "Annex A", "b": "Annex B", "repo": "Repository"},
         "nav_aria": "Main", "nav_movil_aria": "Site sections",
         "salto": "Skip to content", "inicio": "home", "tema": "Switch between light and dark theme",
         "menu": "Contents", "lateral_aria": "Page contents", "en_esta_pagina": "On this page",
@@ -76,6 +85,11 @@ IDIOMAS = {
                        "A management model for development teams where error is seen, discussed and learned from."),
         "regla": "Whoever approves takes responsibility", "notas": ("A note on the metaphor", "Scope"),
         "anexo_palabra": "Annex", "cabecera_autor": "Author", "cabecera_version": "Version", "refs": "references",
+        "copiar": "Copy template", "copiado": "Copied to clipboard.",
+        "copiar_error": "Could not copy. Please select the text by hand.",
+        "desc_a": ("A template for analyzing an incident without looking for someone to blame. Copy it, fill it in "
+                   "with the team and keep it next to the ticket."),
+        "desc_b": "Ground rules so the daily coordinates the team’s work instead of controlling people.",
     },
 }
 
@@ -298,9 +312,9 @@ def autolink(h, anexos=True, idioma="es"):
             if not pila:
                 if anexos:
                     pal = IDIOMAS[idioma]["anexo_palabra"]
-                    pre = IDIOMAS[idioma]["prefijo"]
+                    base = "annex" if idioma == "en" else "anexo"
                     tok = re.sub(rf"\b{pal} ([AB])\b",
-                                 lambda mm: f'<a href="{pre}anexo-{mm.group(1).lower()}.html">{pal} {mm.group(1)}</a>', tok)
+                                 lambda mm: f'<a href="{base}-{mm.group(1).lower()}.html">{pal} {mm.group(1)}</a>', tok)
                 tok = re.sub(r"(https?://[^\s<>()]+[^\s<>().,;:])",
                              lambda mm: f'<a href="{mm.group(1)}" rel="noopener">{mm.group(1)}</a>', tok)
             out.append(tok)
@@ -319,28 +333,27 @@ def nav_html(actual, idioma="es", clase="nav", etiqueta=None):
     L = IDIOMAS[idioma]
     etiqueta = etiqueta or L["nav_aria"]
     pre = L["prefijo"]
-    claves = ("paper_en", "a", "b") if idioma == "en" else ("paper", "a", "b")
+    claves = ("paper_en", "a_en", "b_en") if idioma == "en" else ("paper", "a", "b")
     items = []
     for clave in claves:
         p = PAGINAS[clave]
-        if clave == "paper_en":
-            href = "index.html"
-        else:
-            href = pre + p["archivo"]
+        href = Path(p["archivo"]).name if idioma == "en" else p["archivo"]
         cur = ' aria-current="page"' if clave == actual else ""
-        etiqueta_item = L["nav"]["paper"] if clave.startswith("paper") else L["nav"][clave]
+        etiqueta_item = L["nav"]["paper"] if clave.startswith("paper") else L["nav"][clave[0]]
         items.append(f'<a href="{href}"{cur}>{etiqueta_item}</a>')
     items.append(f'<a href="{REPO_URL}" rel="noopener">{L["nav"]["repo"]}</a>')
     return f'<nav class="{clase}" aria-label="{etiqueta}">' + "".join(items) + "</nav>"
 
 
-def selector_idioma(idioma):
-    """ES | EN. El inglés existe solo para el paper: desde los anexos, EN lleva al paper en inglés."""
+PAREJAS = {"paper": "index.html", "a": "anexo-a.html", "b": "anexo-b.html"}
+
+
+def selector_idioma(clave, idioma):
+    """ES | EN: lleva a la página equivalente en el otro idioma."""
     L = IDIOMAS[idioma]
-    if idioma == "es":
-        es_href, en_href = "index.html", "en/index.html"
-    else:
-        es_href, en_href = "../index.html", "index.html"
+    base = clave.split("_")[0] if clave != "paper_en" else "paper"
+    es_href = PAREJAS[base] if idioma == "es" else "../" + PAREJAS[base]
+    en_href = "en/" + Path(PAGINAS[base + "_en"]["archivo"]).name if idioma == "es" else Path(PAGINAS[base + "_en"]["archivo"]).name
     ces = ' aria-current="true"' if idioma == "es" else ""
     cen = ' aria-current="true"' if idioma == "en" else ""
     return (f'<nav class="idiomas" aria-label="{L["idioma_aria"]}">'
@@ -354,17 +367,15 @@ def pagina(clave, titulo_doc, descripcion, hero, cuerpo, entradas, extra_scripts
     pre = L["prefijo"]
     url = f"{SITE_URL}/{'' if p['archivo'] == 'index.html' else p['archivo'].replace('en/index.html', 'en/')}"
     indice = "".join(f'<li><a href="#{hid}">{esc(t)}</a></li>' for hid, t in entradas)
-    if clave in ("paper", "paper_en"):
-        alternos = (f'<link rel="alternate" hreflang="es" href="{SITE_URL}/">\n'
-                    f'<link rel="alternate" hreflang="en" href="{SITE_URL}/en/">\n'
-                    f'<link rel="alternate" hreflang="x-default" href="{SITE_URL}/">')
-    else:
-        alternos = ""
-    otro_locale = ""
-    if clave == "paper":
-        otro_locale = '<meta property="og:locale:alternate" content="en_US">'
-    elif clave == "paper_en":
-        otro_locale = '<meta property="og:locale:alternate" content="es_AR">'
+    base = clave.split("_")[0]
+    arch_es = PAGINAS[base]["archivo"]
+    arch_en = PAGINAS[base + "_en"]["archivo"]
+    url_es = f"{SITE_URL}/{'' if arch_es == 'index.html' else arch_es}"
+    url_en = f"{SITE_URL}/{arch_en.replace('en/index.html', 'en/')}"
+    alternos = (f'<link rel="alternate" hreflang="es" href="{url_es}">\n'
+                f'<link rel="alternate" hreflang="en" href="{url_en}">\n'
+                f'<link rel="alternate" hreflang="x-default" href="{url_es}">')
+    otro_locale = f'<meta property="og:locale:alternate" content="{"es_AR" if idioma == "en" else "en_US"}">'
     og_img = f"{SITE_URL}/assets/og-en.png" if idioma == "en" else f"{SITE_URL}/assets/og.png"
     inicio = "index.html"
     return f"""<!doctype html>
@@ -397,13 +408,13 @@ def pagina(clave, titulo_doc, descripcion, hero, cuerpo, entradas, extra_scripts
 <link rel="stylesheet" href="{pre}assets/style.css">
 <script>try{{var t=localStorage.getItem("tema");if(t)document.documentElement.setAttribute("data-tema",t)}}catch(e){{}}</script>
 </head>
-<body class="{"anexo" if clave in ("a", "b") else "paper"}">
+<body class="{"anexo" if clave in ("a", "b", "a_en", "b_en") else "paper"}">
 <a class="salto" href="#contenido">{L['salto']}</a>
 <header class="barra">
   <a class="marca" href="{inicio}" aria-label="{SITE_NAME}, {L['inicio']}">Error<b>Valor</b>-IA</a>
   {nav_html(clave, idioma)}
   <div class="herramientas">
-    {selector_idioma(idioma)}
+    {selector_idioma(clave, idioma)}
     <button class="boton-icono" id="boton-tema" type="button" aria-label="{L['tema']}">{ICONO_SOL}{ICONO_LUNA}</button>
     <button class="boton-icono" id="boton-menu" type="button" aria-expanded="false" aria-controls="lateral">{L['menu']}</button>
   </div>
@@ -476,26 +487,31 @@ def construir():
     construir_paper("paper", "es")
     construir_paper("paper_en", "en")
 
-    # Anexos (solo en español)
-    for clave, desc in (("a", DESC_A), ("b", DESC_B)):
+    # Anexos, en los dos idiomas
+    for clave, idioma in (("a", "es"), ("b", "es"), ("a_en", "en"), ("b_en", "en")):
+        L = IDIOMAS[idioma]
         p = PAGINAS[clave]
+        desc = L["desc_" + clave[0]]
         texto = (SRC / p["fuente"]).read_text(encoding="utf-8")
         assert "</" not in texto, "El Markdown contiene '</'; escaparlo antes de incrustarlo"
         h1, _, _, resto = separar_cabecera(texto)
-        cuerpo_html, entradas = procesar_cuerpo(md_a_html(resto), autolink_anexos=False)
+        cuerpo_html, entradas = procesar_cuerpo(md_a_html(resto), autolink_anexos=False, idioma=idioma)
         cuerpo = f'<div class="hoja">{cuerpo_html}</div>'
+        pdf = L["prefijo"] + p["pdf"]
         hero = f"""<section class="encabezado-anexo" aria-labelledby="titulo">
   <h1 id="titulo">{esc(h1)}</h1>
   <p>{esc(desc)}</p>
   <div class="acciones">
-    <a class="boton principal" href="{p['pdf']}" download>Descargar PDF</a>
-    <button class="boton" id="boton-copiar" type="button">Copiar plantilla</button>
+    <a class="boton principal" href="{pdf}" download>{L['pdf']}</a>
+    <button class="boton" id="boton-copiar" type="button" data-ok="{esc(L['copiado'])}" data-error="{esc(L['copiar_error'])}">{L['copiar']}</button>
     <span class="estado" id="estado-copia" role="status" aria-live="polite"></span>
   </div>
 </section>"""
         extra = f'<script type="text/plain" id="fuente-md">\n{texto}</script>'
-        (ROOT / p["archivo"]).write_text(
-            pagina(clave, h1, desc, hero, cuerpo, entradas, extra), encoding="utf-8")
+        destino = ROOT / p["archivo"]
+        destino.parent.mkdir(exist_ok=True)
+        destino.write_text(
+            pagina(clave, h1, desc, hero, cuerpo, entradas, extra, idioma=idioma), encoding="utf-8")
 
     (ROOT / "assets" / "favicon.svg").write_text(svg_favicon(), encoding="utf-8")
     print("Sitio generado:", ", ".join(p["archivo"] for p in PAGINAS.values()))

@@ -22,6 +22,8 @@ ROOT = Path(__file__).resolve().parent.parent
 PDFS = [
     ("index.html", "descargas/ErrorValor-IA_Paper.pdf", "Gestionar el error en la era de la IA"),
     ("en/index.html", "descargas/ErrorValor-IA_Paper_EN.pdf", "Managing Error in the Age of AI"),
+    ("en/annex-a.html", "descargas/ErrorValor-IA_Annex-A_Blameless-post-mortem.pdf", "Annex A. Blameless post-mortem template"),
+    ("en/annex-b.html", "descargas/ErrorValor-IA_Annex-B_Dailies-without-surveillance.pdf", "Annex B. Guidelines for dailies without surveillance"),
     ("anexo-a.html", "descargas/ErrorValor-IA_Anexo-A_Post-mortem-sin-culpa.pdf", "Anexo A. Plantilla de post-mortem sin culpa"),
     ("anexo-b.html", "descargas/ErrorValor-IA_Anexo-B_Dailys-sin-vigilancia.pdf", "Anexo B. Pautas para dailys sin vigilancia"),
 ]

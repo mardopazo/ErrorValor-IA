@@ -231,5 +231,5 @@ The speed of AI isn't going to slow down. What does depend on those of us who ma
 
 ## Annexes
 
-- [Annex A. Blameless post-mortem template](anexo-a.html) (Spanish)
-- [Annex B. Guidelines for dailies without surveillance](anexo-b.html) (Spanish)
+- [Annex A. Blameless post-mortem template](annex-a.html)
+- [Annex B. Guidelines for dailies without surveillance](annex-b.html)

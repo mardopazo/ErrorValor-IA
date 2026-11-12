@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Annex A. Blameless post-mortem template — ErrorValor-IA</title>
+<meta name="description" content="A template for analyzing an incident without looking for someone to blame. Copy it, fill it in with the team and keep it next to the ticket.">
+<meta name="author" content="Martín Dopazo">
+<link rel="canonical" href="https://mardopazo.github.io/ErrorValor-IA/en/annex-a.html">
+<link rel="alternate" hreflang="es" href="https://mardopazo.github.io/ErrorValor-IA/anexo-a.html">
+<link rel="alternate" hreflang="en" href="https://mardopazo.github.io/ErrorValor-IA/en/annex-a.html">
+<link rel="alternate" hreflang="x-default" href="https://mardopazo.github.io/ErrorValor-IA/anexo-a.html">
+<meta name="theme-color" content="#edf0ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11181b" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_AR">
+<meta property="og:site_name" content="ErrorValor-IA">
+<meta property="og:title" content="Annex A. Blameless post-mortem template">
+<meta property="og:description" content="A template for analyzing an incident without looking for someone to blame. Copy it, fill it in with the team and keep it next to the ticket.">
+<meta property="og:url" content="https://mardopazo.github.io/ErrorValor-IA/en/annex-a.html">
+<meta property="og:image" content="https://mardopazo.github.io/ErrorValor-IA/assets/og-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Plan of a panopticon with one highlighted cell and the title of the paper.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/literata-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem("tema");if(t)document.documentElement.setAttribute("data-tema",t)}catch(e){}</script>
+</head>
+<body class="anexo">
+<a class="salto" href="#contenido">Skip to content</a>
+<header class="barra">
+  <a class="marca" href="index.html" aria-label="ErrorValor-IA, home">Error<b>Valor</b>-IA</a>
+  <nav class="nav" aria-label="Main"><a href="index.html">Paper</a><a href="annex-a.html" aria-current="page">Annex A</a><a href="annex-b.html">Annex B</a><a href="https://github.com/mardopazo/ErrorValor-IA" rel="noopener">Repository</a></nav>
+  <div class="herramientas">
+    <nav class="idiomas" aria-label="Language"><a href="../anexo-a.html" lang="es" hreflang="es">ES</a><a href="annex-a.html" lang="en" hreflang="en" aria-current="true">EN</a></nav>
+    <button class="boton-icono" id="boton-tema" type="button" aria-label="Switch between light and dark theme"><svg class="icono-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icono-luna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+    <button class="boton-icono" id="boton-menu" type="button" aria-expanded="false" aria-controls="lateral">Contents</button>
+  </div>
+</header>
+<section class="encabezado-anexo" aria-labelledby="titulo">
+  <h1 id="titulo">Annex A. Blameless post-mortem template</h1>
+  <p>A template for analyzing an incident without looking for someone to blame. Copy it, fill it in with the team and keep it next to the ticket.</p>
+  <div class="acciones">
+    <a class="boton principal" href="../descargas/ErrorValor-IA_Annex-A_Blameless-post-mortem.pdf" download>Download PDF</a>
+    <button class="boton" id="boton-copiar" type="button" data-ok="Copied to clipboard." data-error="Could not copy. Please select the text by hand.">Copy template</button>
+    <span class="estado" id="estado-copia" role="status" aria-live="polite"></span>
+  </div>
+</section>
+<div class="pagina">
+  <aside class="lateral" id="lateral" aria-label="Page contents">
+    <nav class="nav-movil" aria-label="Site sections"><a href="index.html">Paper</a><a href="annex-a.html" aria-current="page">Annex A</a><a href="annex-b.html">Annex B</a><a href="https://github.com/mardopazo/ErrorValor-IA" rel="noopener">Repository</a></nav>
+    <svg class="anillo" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><a href="#post-mortem-report-short-name-of-the-incident" aria-hidden="true" tabindex="-1"><path data-sec="0" d="M61.47 4.02 A56 56 0 0 1 91.72 13.85 L79.26 31.98 A34 34 0 0 0 60.89 26.01 Z"><title>Post-mortem report: [short name of the incident]</title></path></a><a href="#seccion-1" aria-hidden="true" tabindex="-1"><path data-sec="1" d="M94.09 15.57 A56 56 0 0 1 112.79 41.31 L92.05 48.65 A34 34 0 0 0 80.70 33.03 Z"><title>1. Prime Directive</title></path></a><a href="#seccion-2" aria-hidden="true" tabindex="-1"><path data-sec="2" d="M113.69 44.10 A56 56 0 0 1 113.69 75.90 L92.60 69.66 A34 34 0 0 0 92.60 50.34 Z"><title>2. Executive summary</title></path></a><a href="#seccion-3" aria-hidden="true" tabindex="-1"><path data-sec="3" d="M112.79 78.69 A56 56 0 0 1 94.09 104.43 L80.70 86.97 A34 34 0 0 0 92.05 71.35 Z"><title>3. Timeline of events</title></path></a><a href="#seccion-4" aria-hidden="true" tabindex="-1"><path data-sec="4" d="M91.72 106.15 A56 56 0 0 1 61.47 115.98 L60.89 93.99 A34 34 0 0 0 79.26 88.02 Z"><title>4. Root cause analysis (the 5 whys)</title></path></a><a href="#seccion-5" aria-hidden="true" tabindex="-1"><path data-sec="5" d="M58.53 115.98 A56 56 0 0 1 28.28 106.15 L40.74 88.02 A34 34 0 0 0 59.11 93.99 Z"><title>5. AI involvement in the change</title></path></a><a href="#seccion-6" aria-hidden="true" tabindex="-1"><path data-sec="6" d="M25.91 104.43 A56 56 0 0 1 7.21 78.69 L27.95 71.35 A34 34 0 0 0 39.30 86.97 Z"><title>6. Contributing factors (the environment)</title></path></a><a href="#seccion-7" aria-hidden="true" tabindex="-1"><path data-sec="7" d="M6.31 75.90 A56 56 0 0 1 6.31 44.10 L27.40 50.34 A34 34 0 0 0 27.40 69.66 Z"><title>7. Where we got lucky and what we still don’t know</title></path></a><a href="#seccion-8" aria-hidden="true" tabindex="-1"><path data-sec="8" d="M7.21 41.31 A56 56 0 0 1 25.91 15.57 L39.30 33.03 A34 34 0 0 0 27.95 48.65 Z"><title>8. Action and mitigation plan</title></path></a><a href="#seccion-9" aria-hidden="true" tabindex="-1"><path data-sec="9" d="M28.28 13.85 A56 56 0 0 1 58.53 4.02 L59.11 26.01 A34 34 0 0 0 40.74 31.98 Z"><title>9. Learning to share</title></path></a><circle cx="60" cy="60" r="14"/></svg>
+    <p class="contenido-titulo">On this page</p>
+    <ol class="indice"><li><a href="#post-mortem-report-short-name-of-the-incident">Post-mortem report: [short name of the incident]</a></li><li><a href="#seccion-1">1. Prime Directive</a></li><li><a href="#seccion-2">2. Executive summary</a></li><li><a href="#seccion-3">3. Timeline of events</a></li><li><a href="#seccion-4">4. Root cause analysis (the 5 whys)</a></li><li><a href="#seccion-5">5. AI involvement in the change</a></li><li><a href="#seccion-6">6. Contributing factors (the environment)</a></li><li><a href="#seccion-7">7. Where we got lucky and what we still don’t know</a></li><li><a href="#seccion-8">8. Action and mitigation plan</a></li><li><a href="#seccion-9">9. Learning to share</a></li></ol>
+  </aside>
+  <main class="prosa" id="contenido">
+<div class="hoja"><div class="intro"><p><strong>Note for the facilitator:</strong> start the meeting by reading the Prime Directive (section 1) out loud. The goal is to understand <strong>how the system allowed the error to happen</strong>, not who pressed the button.</p>
+<hr />
+</div><section id="post-mortem-report-short-name-of-the-incident"><h2 id="post-mortem-report-short-name-of-the-incident">Post-mortem report: [short name of the incident]</h2>
+<div class="tabla" tabindex="0" role="region" aria-label="Table"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Incident date</td>
+<td>DD/MM/YYYY</td>
+</tr>
+<tr>
+<td>Investigation lead</td>
+<td>[name]</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>Under review / Completed</td>
+</tr>
+</tbody>
+</table></div>
+</section><section id="seccion-1"><h2 id="seccion-1"><span class="num">1</span>Prime Directive</h2>
+<blockquote>
+<p>“Regardless of what we discover today, we start from the premise that everyone did the best job they could with the information, tools, time and resources available at that moment.”</p>
+</blockquote>
+<p><em>Adapted from the “Prime Directive” of retrospectives (Norm Kerth, 2001).</em></p>
+</section><section id="seccion-2"><h2 id="seccion-2"><span class="num">2</span>Executive summary</h2>
+<p>A short description of what happened, what impact it had on users or on the system, and, broadly, how it was resolved.</p>
+<ul>
+<li><strong>What failed?</strong></li>
+<li><strong>Impact:</strong> (e.g., 15% of transactions failed for 2 hours).</li>
+</ul>
+</section><section id="seccion-3"><h2 id="seccion-3"><span class="num">3</span>Timeline of events</h2>
+<p>An objective timeline. Avoid personal names: use roles or system actions.</p>
+<ul>
+<li>14:00 – Version X is deployed to production.</li>
+<li>14:05 – The alerting system detects a spike of 500 errors in the payments module.</li>
+<li>14:12 – The on-call team receives the notification and starts triage.</li>
+<li>14:30 – The change to the <code>DB_TIMEOUT</code> environment variable is identified as the cause of the blockage.</li>
+<li>14:45 – Rollback to the previous version. System stable.</li>
+</ul>
+</section><section id="seccion-4"><h2 id="seccion-4"><span class="num">4</span>Root cause analysis (the 5 whys)</h2>
+<p>A method for getting to the systemic problem. It works as a guide, not as a rule: an incident usually has <strong>several</strong> causes, which are collected in section 6.</p>
+<ol>
+<li>Why did payments fail? <em>Because the database didn’t respond in time.</em></li>
+<li>Why didn’t it respond in time? <em>Because the timeout parameter was drastically reduced.</em></li>
+<li>Why was it reduced? <em>Because the configuration was unified with the testing environment.</em></li>
+<li>Why was it unified without validating the impact? <em>Because the review of environment variables is manual and isn’t documented in the pipeline.</em></li>
+<li>Why is it manual? <em>Because there is no configuration management tool that validates limits per environment.</em></li>
+</ol>
+</section><section id="seccion-5"><h2 id="seccion-5"><span class="num">5</span>AI involvement in the change</h2>
+<p><em>Fill in if the code involved was generated or assisted by AI. This section doesn’t aim to assign blame to the tool or to the person: it aims to understand which part of the process was left without human understanding.</em></p>
+<ul>
+<li><strong>Tool and context:</strong> which tool was used and what context (files, requirements, constraints) did it receive?</li>
+<li><strong>Prompt or instruction:</strong> what exactly was asked? Was information about the business rule missing?</li>
+<li><strong>What was actually reviewed:</strong> was there a line-by-line read, tests of our own, manual testing? Who approved?</li>
+<li><strong>Understanding:</strong> can the team today explain what that change does and which cases it doesn’t cover?</li>
+<li><strong>Cases not considered:</strong> which edge cases or exceptional situations weren’t taken into account?</li>
+</ul>
+</section><section id="seccion-6"><h2 id="seccion-6"><span class="num">6</span>Contributing factors (the environment)</h2>
+<p>Which elements of the environment or of the tools made it easier for the error to happen?</p>
+<ul>
+<li><strong>Lack of visibility:</strong> monitoring didn’t show the connection saturation right away.</li>
+<li><strong>Outdated documentation:</strong> the deployment manual didn’t mention the dependencies of that variable.</li>
+<li><strong>Pressure from deadlines or metrics:</strong> (fill in if applicable).</li>
+</ul>
+</section><section id="seccion-7"><h2 id="seccion-7"><span class="num">7</span>Where we got lucky and what we still don’t know</h2>
+<ul>
+<li><strong>Luck:</strong> what could have gone worse and didn’t? (e.g., the incident happened outside peak hours).</li>
+<li><strong>Unknowns:</strong> which questions remain open? What can’t we explain yet?</li>
+</ul>
+</section><section id="seccion-8"><h2 id="seccion-8"><span class="num">8</span>Action and mitigation plan</h2>
+<p>Concrete tasks, <strong>with an owner and a date</strong>, to make the system more robust. <strong>No action can be “the developer should be more careful”.</strong></p>
+<div class="tabla apilable" tabindex="0" role="region" aria-label="Table"><table>
+<thead>
+<tr>
+<th>Preventive or corrective action</th>
+<th>Owner</th>
+<th>Priority (High / Medium / Low)</th>
+<th>Target date</th>
+<th>Ticket</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Preventive or corrective action">Automate the validation of variables in the CI/CD pipeline</td>
+<td data-label="Owner">[role or name]</td>
+<td data-label="Priority (High / Medium / Low)">High</td>
+<td data-label="Target date">DD/MM</td>
+<td data-label="Ticket">PROD-1234</td>
+</tr>
+<tr>
+<td data-label="Preventive or corrective action">Set up specific alerts for the database connection pool</td>
+<td data-label="Owner">[role or name]</td>
+<td data-label="Priority (High / Medium / Low)">Medium</td>
+<td data-label="Target date">DD/MM</td>
+<td data-label="Ticket">PROD-1235</td>
+</tr>
+<tr>
+<td data-label="Preventive or corrective action">Update the architecture documentation of the payments module</td>
+<td data-label="Owner">[role or name]</td>
+<td data-label="Priority (High / Medium / Low)">Low</td>
+<td data-label="Target date">DD/MM</td>
+<td data-label="Ticket">PROD-1236</td>
+</tr>
+</tbody>
+</table></div>
+</section><section id="seccion-9"><h2 id="seccion-9"><span class="num">9</span>Learning to share</h2>
+<p>One or two sentences the team can take away, written without personal names and fit to be published.</p>
+<hr />
+<p><em>A post-mortem without closed actions is an empty ritual. Review the status of the table in section 8 at the next retrospective.</em></p></section></div>
+  </main>
+</div>
+<footer class="pie">
+  <div>
+    <p>Martín Dopazo. This text is a draft under review: it can be discussed, corrected and improved.</p>
+    <p>Content under the <a href="https://creativecommons.org/licenses/by/4.0/deed.en" rel="license noopener">Creative Commons Attribution 4.0 (CC BY 4.0)</a> license: you may copy, adapt and share it, even for commercial purposes, crediting Martín Dopazo and this site.</p>
+    <p><a href="https://github.com/mardopazo/ErrorValor-IA" rel="noopener">Code and sources on GitHub</a></p>
+  </div>
+</footer>
+<script src="../assets/site.js" defer></script>
+<script type="text/plain" id="fuente-md">
+# Annex A. Blameless post-mortem template
+
+**Note for the facilitator:** start the meeting by reading the Prime Directive (section 1) out loud. The goal is to understand **how the system allowed the error to happen**, not who pressed the button.
+
+---
+
+## Post-mortem report: [short name of the incident]
+
+| Field | Value |
+|---|---|
+| Incident date | DD/MM/YYYY |
+| Investigation lead | [name] |
+| Status | Under review / Completed |
+
+## 1. Prime Directive
+
+> "Regardless of what we discover today, we start from the premise that everyone did the best job they could with the information, tools, time and resources available at that moment."
+
+*Adapted from the "Prime Directive" of retrospectives (Norm Kerth, 2001).*
+
+## 2. Executive summary
+
+A short description of what happened, what impact it had on users or on the system, and, broadly, how it was resolved.
+
+- **What failed?**
+- **Impact:** (e.g., 15% of transactions failed for 2 hours).
+
+## 3. Timeline of events
+
+An objective timeline. Avoid personal names: use roles or system actions.
+
+- 14:00 – Version X is deployed to production.
+- 14:05 – The alerting system detects a spike of 500 errors in the payments module.
+- 14:12 – The on-call team receives the notification and starts triage.
+- 14:30 – The change to the `DB_TIMEOUT` environment variable is identified as the cause of the blockage.
+- 14:45 – Rollback to the previous version. System stable.
+
+## 4. Root cause analysis (the 5 whys)
+
+A method for getting to the systemic problem. It works as a guide, not as a rule: an incident usually has **several** causes, which are collected in section 6.
+
+1. Why did payments fail? *Because the database didn't respond in time.*
+2. Why didn't it respond in time? *Because the timeout parameter was drastically reduced.*
+3. Why was it reduced? *Because the configuration was unified with the testing environment.*
+4. Why was it unified without validating the impact? *Because the review of environment variables is manual and isn't documented in the pipeline.*
+5. Why is it manual? *Because there is no configuration management tool that validates limits per environment.*
+
+## 5. AI involvement in the change
+
+*Fill in if the code involved was generated or assisted by AI. This section doesn't aim to assign blame to the tool or to the person: it aims to understand which part of the process was left without human understanding.*
+
+- **Tool and context:** which tool was used and what context (files, requirements, constraints) did it receive?
+- **Prompt or instruction:** what exactly was asked? Was information about the business rule missing?
+- **What was actually reviewed:** was there a line-by-line read, tests of our own, manual testing? Who approved?
+- **Understanding:** can the team today explain what that change does and which cases it doesn't cover?
+- **Cases not considered:** which edge cases or exceptional situations weren't taken into account?
+
+## 6. Contributing factors (the environment)
+
+Which elements of the environment or of the tools made it easier for the error to happen?
+
+- **Lack of visibility:** monitoring didn't show the connection saturation right away.
+- **Outdated documentation:** the deployment manual didn't mention the dependencies of that variable.
+- **Pressure from deadlines or metrics:** (fill in if applicable).
+
+## 7. Where we got lucky and what we still don't know
+
+- **Luck:** what could have gone worse and didn't? (e.g., the incident happened outside peak hours).
+- **Unknowns:** which questions remain open? What can't we explain yet?
+
+## 8. Action and mitigation plan
+
+Concrete tasks, **with an owner and a date**, to make the system more robust. **No action can be "the developer should be more careful".**
+
+| Preventive or corrective action | Owner | Priority (High / Medium / Low) | Target date | Ticket |
+|---|---|---|---|---|
+| Automate the validation of variables in the CI/CD pipeline | [role or name] | High | DD/MM | PROD-1234 |
+| Set up specific alerts for the database connection pool | [role or name] | Medium | DD/MM | PROD-1235 |
+| Update the architecture documentation of the payments module | [role or name] | Low | DD/MM | PROD-1236 |
+
+## 9. Learning to share
+
+One or two sentences the team can take away, written without personal names and fit to be published.
+
+---
+
+*A post-mortem without closed actions is an empty ritual. Review the status of the table in section 8 at the next retrospective.*
+</script>
+</body>
+</html>
