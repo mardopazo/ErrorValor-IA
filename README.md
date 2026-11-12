@@ -4,17 +4,18 @@
 
 Paper de Martín Dopazo sobre cómo gestionar equipos de desarrollo cuando la IA escribe código más rápido de lo que podemos revisarlo y entenderlo. Propone un entorno donde el error se ve, se discute y se aprende, y distingue culpa de responsabilidad.
 
-Sitio: https://mardopazo.github.io/ErrorValor-IA/
+Sitio: https://mardopazo.github.io/ErrorValor-IA/ (español) · https://mardopazo.github.io/ErrorValor-IA/en/ (English)
 
 ## Qué hay en el repositorio
 
 | Ruta | Contenido |
 |---|---|
-| `index.html` | El paper |
+| `index.html` | El paper (español) |
+| `en/index.html` | The paper (English). Los anexos todavía existen solo en español |
 | `anexo-a.html` | Anexo A. Plantilla de post-mortem sin culpa |
 | `anexo-b.html` | Anexo B. Pautas para dailys sin vigilancia |
-| `fuentes/` | Los textos en Markdown. **Es lo que se edita.** |
-| `descargas/` | PDF del paper y de los anexos (lo que se ofrece para descargar) |
+| `fuentes/` | Los textos en Markdown (`paper.md` en español, `paper.en.md` en inglés). **Es lo que se edita.** |
+| `descargas/` | PDF del paper (español e inglés) y de los anexos |
 | `assets/` | Estilos, script, tipografías, imagen para compartir |
 | `borradores/` | Versiones anteriores y notas de revisión |
 | `build.py` | Genera las páginas HTML a partir de `fuentes/` |
@@ -23,7 +24,7 @@ Sitio: https://mardopazo.github.io/ErrorValor-IA/
 
 ## Cómo se actualiza
 
-1. Editar los archivos de `fuentes/`.
+1. Editar los archivos de `fuentes/`. Si se cambia `paper.md`, hay que reflejar el cambio en `paper.en.md` para que las dos versiones no se desincronicen.
 2. Regenerar las páginas:
 
    ```

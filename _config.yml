@@ -8,3 +8,4 @@ exclude:
   - build.py
   - README.md
   - assets/og-fuente.html
+  - assets/og-fuente-en.html

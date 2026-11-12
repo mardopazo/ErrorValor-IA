@@ -27,10 +27,56 @@ SRC = ROOT / "fuentes"
 PAGINAS = {
     "paper": {"archivo": "index.html", "fuente": "paper.md", "nav": "Paper",
               "pdf": "descargas/ErrorValor-IA_Paper.pdf"},
+    "paper_en": {"archivo": "en/index.html", "fuente": "paper.en.md", "nav": "Paper", "idioma": "en",
+                 "pdf": "descargas/ErrorValor-IA_Paper_EN.pdf"},
     "a": {"archivo": "anexo-a.html", "fuente": "anexo-a-postmortem.md", "nav": "Anexo A",
           "pdf": "descargas/ErrorValor-IA_Anexo-A_Post-mortem-sin-culpa.pdf"},
     "b": {"archivo": "anexo-b.html", "fuente": "anexo-b-dailys.md", "nav": "Anexo B",
           "pdf": "descargas/ErrorValor-IA_Anexo-B_Dailys-sin-vigilancia.pdf"},
+}
+
+# Textos de interfaz por idioma. El español está en la raíz; el inglés en /en/ (solo el paper).
+IDIOMAS = {
+    "es": {
+        "html_lang": "es-AR", "og_locale": "es_AR", "prefijo": "", "carpeta": "",
+        "nav": {"paper": "Paper", "a": "Anexo A", "b": "Anexo B", "repo": "Repositorio"},
+        "nav_aria": "Principal", "nav_movil_aria": "Secciones del sitio",
+        "salto": "Saltar al contenido", "inicio": "inicio", "tema": "Cambiar entre tema claro y oscuro",
+        "menu": "Contenido", "lateral_aria": "Contenido de la página", "en_esta_pagina": "En esta página",
+        "pie1": "{autor}. Este texto es un borrador en revisión: se puede discutir, corregir y mejorar.",
+        "pie2": ('Contenido bajo licencia <a href="https://creativecommons.org/licenses/by/4.0/deed.es" rel="license noopener">'
+                 'Creative Commons Atribución 4.0 (CC BY 4.0)</a>: podés copiarlo, adaptarlo y compartirlo, incluso con fines '
+                 'comerciales, citando a {autor} y este sitio.'),
+        "pie3": "Código y fuentes en GitHub", "pdf": "Descargar PDF", "autor": "Autor", "version": "Versión",
+        "tabla": "Tabla", "og_alt": "Planta de un panóptico con una celda resaltada y el título del paper.",
+        "leyenda1": "Celda observada", "leyenda2": "El error, a la vista del equipo",
+        "pano_titulo": "Planta de un panóptico: una torre central rodeada de celdas iluminadas, con una celda resaltada.",
+        "idioma_aria": "Idioma",
+        "desc_paper": ("Con la IA escribimos código más rápido de lo que podemos entenderlo. "
+                       "Un modelo de gestión para equipos de desarrollo donde el error se ve, se discute y se aprende."),
+        "regla": "Quien aprueba se hace responsable", "notas": ("Una aclaración", "Alcance"),
+        "anexo_palabra": "Anexo", "cabecera_autor": "Autor", "cabecera_version": "Versión", "refs": "referencias",
+    },
+    "en": {
+        "html_lang": "en", "og_locale": "en_US", "prefijo": "../", "carpeta": "en/",
+        "nav": {"paper": "Paper", "a": "Annex A (ES)", "b": "Annex B (ES)", "repo": "Repository"},
+        "nav_aria": "Main", "nav_movil_aria": "Site sections",
+        "salto": "Skip to content", "inicio": "home", "tema": "Switch between light and dark theme",
+        "menu": "Contents", "lateral_aria": "Page contents", "en_esta_pagina": "On this page",
+        "pie1": "{autor}. This text is a draft under review: it can be discussed, corrected and improved.",
+        "pie2": ('Content under the <a href="https://creativecommons.org/licenses/by/4.0/deed.en" rel="license noopener">'
+                 'Creative Commons Attribution 4.0 (CC BY 4.0)</a> license: you may copy, adapt and share it, even for '
+                 'commercial purposes, crediting {autor} and this site.'),
+        "pie3": "Code and sources on GitHub", "pdf": "Download PDF", "autor": "Author", "version": "Version",
+        "tabla": "Table", "og_alt": "Plan of a panopticon with one highlighted cell and the title of the paper.",
+        "leyenda1": "Observed cell", "leyenda2": "Error, in plain view of the team",
+        "pano_titulo": "Plan of a panopticon: a central tower surrounded by lit cells, with one cell highlighted.",
+        "idioma_aria": "Language",
+        "desc_paper": ("With AI we write code faster than we can understand it. "
+                       "A management model for development teams where error is seen, discussed and learned from."),
+        "regla": "Whoever approves takes responsibility", "notas": ("A note on the metaphor", "Scope"),
+        "anexo_palabra": "Annex", "cabecera_autor": "Author", "cabecera_version": "Version", "refs": "references",
+    },
 }
 
 DESC_PAPER = ("Con la IA escribimos código más rápido de lo que podemos entenderlo. "
@@ -69,7 +115,7 @@ def slug(texto):
 
 
 # --- Figuras -----------------------------------------------------------------
-def svg_panoptico(n=28, error=9):
+def svg_panoptico(n=28, error=9, titulo=None):
     """Planta de un panóptico: anillo de celdas, torre central, una celda destacada."""
     cx = cy = 300
     r0, r1 = 205, 262
@@ -94,8 +140,7 @@ def svg_panoptico(n=28, error=9):
     partes.append(f'<circle class="pano-torre" cx="{cx}" cy="{cy}" r="58"/>')
     partes.append(f'<circle class="pano-luz" cx="{cx}" cy="{cy}" r="9"/>')
     return ('<svg viewBox="0 0 600 600" role="img" aria-labelledby="pano-t" focusable="false">'
-            '<title id="pano-t">Planta de un panóptico: una torre central rodeada de celdas iluminadas, '
-            'con una celda resaltada.</title>' + "".join(partes) + "</svg>")
+            f'<title id="pano-t">{esc(titulo or IDIOMAS["es"]["pano_titulo"])}</title>' + "".join(partes) + "</svg>")
 
 
 def svg_anillo(entradas):
@@ -150,11 +195,11 @@ def separar_cabecera(texto):
     h1 = re.sub(r"^#\s+", "", lineas[0]).strip()
     resto = "\n".join(lineas[1:]).strip("\n")
     autor = version = None
-    m = re.search(r"^\*\*Autor:\*\*\s*(.+)$", resto, re.M)
+    m = re.search(r"^\*\*(?:Autor|Author):\*\*\s*(.+)$", resto, re.M)
     if m:
         autor = m.group(1).strip()
         resto = resto.replace(m.group(0), "", 1)
-    m = re.search(r"^\*\*Versión:\*\*\s*(.+)$", resto, re.M)
+    m = re.search(r"^\*\*(?:Versión|Version):\*\*\s*(.+)$", resto, re.M)
     if m:
         version = m.group(1).strip()
         resto = resto.replace(m.group(0), "", 1)
@@ -162,7 +207,8 @@ def separar_cabecera(texto):
     return h1, autor, version, resto.strip("\n")
 
 
-def procesar_cuerpo(cuerpo_html, autolink_anexos, editorial=False):
+def procesar_cuerpo(cuerpo_html, autolink_anexos, editorial=False, idioma="es"):
+    L = IDIOMAS[idioma]
     # tablas: contenedor desplazable y, si tienen 3 columnas o más, etiquetas para apilarlas en el móvil
     def preparar_tabla(m):
         t = m.group(0)
@@ -177,7 +223,7 @@ def procesar_cuerpo(cuerpo_html, autolink_anexos, editorial=False):
             if cuerpo:
                 t = t.replace(cuerpo.group(0), re.sub(r"<tr>.*?</tr>", etiquetar_fila, cuerpo.group(0), flags=re.S))
         clase = "tabla apilable" if apilable else "tabla"
-        return f'<div class="{clase}" tabindex="0" role="region" aria-label="Tabla">{t}</div>'
+        return f'<div class="{clase}" tabindex="0" role="region" aria-label="{L["tabla"]}">{t}</div>'
     cuerpo_html = re.sub(r"<table>.*?</table>", preparar_tabla, cuerpo_html, flags=re.S)
 
     # citas: tres usos
@@ -186,9 +232,9 @@ def procesar_cuerpo(cuerpo_html, autolink_anexos, editorial=False):
         txt = re.sub(r"<[^>]+>", "", inner).strip()
         if not editorial:
             cls = ""
-        elif txt.startswith("Quien aprueba se hace responsable"):
+        elif txt.startswith(L["regla"]):
             cls = "regla"
-        elif inner.lstrip().startswith("<p><strong>Una aclaración") or inner.lstrip().startswith("<p><strong>Alcance"):
+        elif any(inner.lstrip().startswith("<p><strong>" + n) for n in L["notas"]):
             cls = "nota"
         elif not re.search(r"<strong>", inner) and len(txt) < 400:
             cls = "tesis"
@@ -223,7 +269,7 @@ def procesar_cuerpo(cuerpo_html, autolink_anexos, editorial=False):
         resto = re.sub(r"<h3>(.*?)</h3>",
                        lambda mm: f'<h3 id="seccion-{mm.group(1).split()[0].replace(".", "-")}">{mm.group(1)}</h3>'
                        if re.match(r"^\d+\.\d+\s", mm.group(1)) else f'<h3 id="{slug(mm.group(1))}">{mm.group(1)}</h3>', resto)
-        clase = ' class="refs"' if hid == "referencias" else ""
+        clase = ' class="refs"' if hid == L["refs"] else ""
         etiqueta = (f"{num}. {titulo}" if num else re.sub(r"<[^>]+>", "", titulo))
         entradas.append((hid, etiqueta))
         salida.append(f'<section id="{hid}"{clase}>{nuevo_h2}{resto}</section>')
@@ -231,11 +277,11 @@ def procesar_cuerpo(cuerpo_html, autolink_anexos, editorial=False):
     if intro.strip():
         cuerpo = f'<div class="intro">{intro}</div>' + cuerpo
 
-    cuerpo = autolink(cuerpo, anexos=autolink_anexos)
+    cuerpo = autolink(cuerpo, anexos=autolink_anexos, idioma=idioma)
     return cuerpo, entradas
 
 
-def autolink(h, anexos=True):
+def autolink(h, anexos=True, idioma="es"):
     """Enlaza 'Anexo A' / 'Anexo B' y las URL sueltas en el texto corrido (fuera de enlaces, títulos y código)."""
     out, pila = [], []
     for tok in re.split(r"(<[^>]+>)", h):
@@ -251,8 +297,10 @@ def autolink(h, anexos=True):
         else:
             if not pila:
                 if anexos:
-                    tok = re.sub(r"\bAnexo ([AB])\b",
-                                 lambda mm: f'<a href="anexo-{mm.group(1).lower()}.html">Anexo {mm.group(1)}</a>', tok)
+                    pal = IDIOMAS[idioma]["anexo_palabra"]
+                    pre = IDIOMAS[idioma]["prefijo"]
+                    tok = re.sub(rf"\b{pal} ([AB])\b",
+                                 lambda mm: f'<a href="{pre}anexo-{mm.group(1).lower()}.html">{pal} {mm.group(1)}</a>', tok)
                 tok = re.sub(r"(https?://[^\s<>()]+[^\s<>().,;:])",
                              lambda mm: f'<a href="{mm.group(1)}" rel="noopener">{mm.group(1)}</a>', tok)
             out.append(tok)
@@ -267,21 +315,60 @@ ICONO_LUNA = ('<svg class="icono-luna" viewBox="0 0 24 24" fill="none" stroke="c
               'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>')
 
 
-def nav_html(actual, clase="nav", etiqueta="Principal"):
+def nav_html(actual, idioma="es", clase="nav", etiqueta=None):
+    L = IDIOMAS[idioma]
+    etiqueta = etiqueta or L["nav_aria"]
+    pre = L["prefijo"]
+    claves = ("paper_en", "a", "b") if idioma == "en" else ("paper", "a", "b")
     items = []
-    for clave, p in PAGINAS.items():
+    for clave in claves:
+        p = PAGINAS[clave]
+        if clave == "paper_en":
+            href = "index.html"
+        else:
+            href = pre + p["archivo"]
         cur = ' aria-current="page"' if clave == actual else ""
-        items.append(f'<a href="{p["archivo"]}"{cur}>{p["nav"]}</a>')
-    items.append(f'<a href="{REPO_URL}" rel="noopener">Repositorio</a>')
+        etiqueta_item = L["nav"]["paper"] if clave.startswith("paper") else L["nav"][clave]
+        items.append(f'<a href="{href}"{cur}>{etiqueta_item}</a>')
+    items.append(f'<a href="{REPO_URL}" rel="noopener">{L["nav"]["repo"]}</a>')
     return f'<nav class="{clase}" aria-label="{etiqueta}">' + "".join(items) + "</nav>"
 
 
-def pagina(clave, titulo_doc, descripcion, hero, cuerpo, entradas, extra_scripts=""):
+def selector_idioma(idioma):
+    """ES | EN. El inglés existe solo para el paper: desde los anexos, EN lleva al paper en inglés."""
+    L = IDIOMAS[idioma]
+    if idioma == "es":
+        es_href, en_href = "index.html", "en/index.html"
+    else:
+        es_href, en_href = "../index.html", "index.html"
+    ces = ' aria-current="true"' if idioma == "es" else ""
+    cen = ' aria-current="true"' if idioma == "en" else ""
+    return (f'<nav class="idiomas" aria-label="{L["idioma_aria"]}">'
+            f'<a href="{es_href}" lang="es" hreflang="es"{ces}>ES</a>'
+            f'<a href="{en_href}" lang="en" hreflang="en"{cen}>EN</a></nav>')
+
+
+def pagina(clave, titulo_doc, descripcion, hero, cuerpo, entradas, extra_scripts="", idioma="es"):
     p = PAGINAS[clave]
-    url = f"{SITE_URL}/{'' if p['archivo'] == 'index.html' else p['archivo']}"
+    L = IDIOMAS[idioma]
+    pre = L["prefijo"]
+    url = f"{SITE_URL}/{'' if p['archivo'] == 'index.html' else p['archivo'].replace('en/index.html', 'en/')}"
     indice = "".join(f'<li><a href="#{hid}">{esc(t)}</a></li>' for hid, t in entradas)
+    if clave in ("paper", "paper_en"):
+        alternos = (f'<link rel="alternate" hreflang="es" href="{SITE_URL}/">\n'
+                    f'<link rel="alternate" hreflang="en" href="{SITE_URL}/en/">\n'
+                    f'<link rel="alternate" hreflang="x-default" href="{SITE_URL}/">')
+    else:
+        alternos = ""
+    otro_locale = ""
+    if clave == "paper":
+        otro_locale = '<meta property="og:locale:alternate" content="en_US">'
+    elif clave == "paper_en":
+        otro_locale = '<meta property="og:locale:alternate" content="es_AR">'
+    og_img = f"{SITE_URL}/assets/og-en.png" if idioma == "en" else f"{SITE_URL}/assets/og.png"
+    inicio = "index.html"
     return f"""<!doctype html>
-<html lang="es-AR">
+<html lang="{L['html_lang']}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -289,41 +376,44 @@ def pagina(clave, titulo_doc, descripcion, hero, cuerpo, entradas, extra_scripts
 <meta name="description" content="{esc(descripcion)}">
 <meta name="author" content="{esc(AUTOR)}">
 <link rel="canonical" href="{url}">
+{alternos}
 <meta name="theme-color" content="#edf0ec" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#11181b" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="article">
-<meta property="og:locale" content="es_AR">
+<meta property="og:locale" content="{L['og_locale']}">
+{otro_locale}
 <meta property="og:site_name" content="{SITE_NAME}">
 <meta property="og:title" content="{esc(titulo_doc)}">
 <meta property="og:description" content="{esc(descripcion)}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{SITE_URL}/assets/og.png">
+<meta property="og:image" content="{og_img}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Planta de un panóptico con una celda resaltada y el título del paper.">
+<meta property="og:image:alt" content="{esc(L['og_alt'])}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="assets/fonts/literata-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="{pre}assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="{pre}assets/fonts/literata-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{pre}assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{pre}assets/style.css">
 <script>try{{var t=localStorage.getItem("tema");if(t)document.documentElement.setAttribute("data-tema",t)}}catch(e){{}}</script>
 </head>
 <body class="{"anexo" if clave in ("a", "b") else "paper"}">
-<a class="salto" href="#contenido">Saltar al contenido</a>
+<a class="salto" href="#contenido">{L['salto']}</a>
 <header class="barra">
-  <a class="marca" href="index.html" aria-label="{SITE_NAME}, inicio">Error<b>Valor</b>-IA</a>
-  {nav_html(clave)}
+  <a class="marca" href="{inicio}" aria-label="{SITE_NAME}, {L['inicio']}">Error<b>Valor</b>-IA</a>
+  {nav_html(clave, idioma)}
   <div class="herramientas">
-    <button class="boton-icono" id="boton-tema" type="button" aria-label="Cambiar entre tema claro y oscuro">{ICONO_SOL}{ICONO_LUNA}</button>
-    <button class="boton-icono" id="boton-menu" type="button" aria-expanded="false" aria-controls="lateral">Contenido</button>
+    {selector_idioma(idioma)}
+    <button class="boton-icono" id="boton-tema" type="button" aria-label="{L['tema']}">{ICONO_SOL}{ICONO_LUNA}</button>
+    <button class="boton-icono" id="boton-menu" type="button" aria-expanded="false" aria-controls="lateral">{L['menu']}</button>
   </div>
 </header>
 {hero}
 <div class="pagina">
-  <aside class="lateral" id="lateral" aria-label="Contenido de la página">
-    {nav_html(clave, "nav-movil", "Secciones del sitio")}
+  <aside class="lateral" id="lateral" aria-label="{L['lateral_aria']}">
+    {nav_html(clave, idioma, "nav-movil", L['nav_movil_aria'])}
     {svg_anillo(entradas)}
-    <p class="contenido-titulo">En esta página</p>
+    <p class="contenido-titulo">{L['en_esta_pagina']}</p>
     <ol class="indice">{indice}</ol>
   </aside>
   <main class="prosa" id="contenido">
@@ -332,12 +422,12 @@ def pagina(clave, titulo_doc, descripcion, hero, cuerpo, entradas, extra_scripts
 </div>
 <footer class="pie">
   <div>
-    <p>{esc(AUTOR)}. Este texto es un borrador en revisión: se puede discutir, corregir y mejorar.</p>
-    <p>Contenido bajo licencia <a href="https://creativecommons.org/licenses/by/4.0/deed.es" rel="license noopener">Creative Commons Atribución 4.0 (CC BY 4.0)</a>: podés copiarlo, adaptarlo y compartirlo, incluso con fines comerciales, citando a {esc(AUTOR)} y este sitio.</p>
-    <p><a href="{REPO_URL}" rel="noopener">Código y fuentes en GitHub</a></p>
+    <p>{L['pie1'].format(autor=esc(AUTOR))}</p>
+    <p>{L['pie2'].format(autor=esc(AUTOR))}</p>
+    <p><a href="{REPO_URL}" rel="noopener">{L['pie3']}</a></p>
   </div>
 </footer>
-<script src="assets/site.js" defer></script>
+<script src="{pre}assets/site.js" defer></script>
 {extra_scripts}
 </body>
 </html>
@@ -345,39 +435,48 @@ def pagina(clave, titulo_doc, descripcion, hero, cuerpo, entradas, extra_scripts
 
 
 # --- Armado de cada página -----------------------------------------------------
-def construir():
-    # Paper
-    texto = (SRC / PAGINAS["paper"]["fuente"]).read_text(encoding="utf-8")
+def construir_paper(clave, idioma):
+    L = IDIOMAS[idioma]
+    pg = PAGINAS[clave]
+    texto = (SRC / pg["fuente"]).read_text(encoding="utf-8")
     h1, autor, version, resto = separar_cabecera(texto)
     principal, _, sub = h1.partition(":")
     sub = sub.strip()
-    cuerpo_html, entradas = procesar_cuerpo(md_a_html(resto), autolink_anexos=True, editorial=True)
+    cuerpo_html, entradas = procesar_cuerpo(md_a_html(resto), autolink_anexos=True, editorial=True, idioma=idioma)
     ficha = ""
     if autor or version:
         ficha = '<dl class="ficha">'
         if autor:
-            ficha += f"<dt>Autor</dt><dd>{esc(autor)}</dd>"
+            ficha += f"<dt>{L['autor']}</dt><dd>{esc(autor)}</dd>"
         if version:
-            ficha += f"<dt>Versión</dt><dd>{esc(version)}</dd>"
+            ficha += f"<dt>{L['version']}</dt><dd>{esc(version)}</dd>"
         ficha += "</dl>"
+    pdf = L["prefijo"] + pg["pdf"]
     hero = f"""<section class="portada" aria-labelledby="titulo">
   <div>
     <h1 id="titulo">{esc(principal.strip())}</h1>
     {f'<p class="subtitulo">{esc(sub)}</p>' if sub else ''}
     {ficha}
     <div class="acciones">
-      <a class="boton principal" href="{PAGINAS['paper']['pdf']}" download>Descargar PDF</a>
+      <a class="boton principal" href="{pdf}" download>{L['pdf']}</a>
     </div>
   </div>
   <figure class="figura-panoptico">
-    {svg_panoptico()}
-    <figcaption><span class="leyenda"><i class="tenue"></i>Celda observada</span><span class="leyenda"><i class="fuerte"></i>El error, a la vista del equipo</span></figcaption>
+    {svg_panoptico(titulo=L['pano_titulo'])}
+    <figcaption><span class="leyenda"><i class="tenue"></i>{L['leyenda1']}</span><span class="leyenda"><i class="fuerte"></i>{L['leyenda2']}</span></figcaption>
   </figure>
 </section>"""
-    (ROOT / PAGINAS["paper"]["archivo"]).write_text(
-        pagina("paper", h1, DESC_PAPER, hero, cuerpo_html, entradas), encoding="utf-8")
+    destino = ROOT / pg["archivo"]
+    destino.parent.mkdir(exist_ok=True)
+    destino.write_text(
+        pagina(clave, h1, L["desc_paper"], hero, cuerpo_html, entradas, idioma=idioma), encoding="utf-8")
 
-    # Anexos
+
+def construir():
+    construir_paper("paper", "es")
+    construir_paper("paper_en", "en")
+
+    # Anexos (solo en español)
     for clave, desc in (("a", DESC_A), ("b", DESC_B)):
         p = PAGINAS[clave]
         texto = (SRC / p["fuente"]).read_text(encoding="utf-8")

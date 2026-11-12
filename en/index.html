@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Managing Error in the Age of AI: From the Panopticon to a Learning Culture — ErrorValor-IA</title>
+<meta name="description" content="With AI we write code faster than we can understand it. A management model for development teams where error is seen, discussed and learned from.">
+<meta name="author" content="Martín Dopazo">
+<link rel="canonical" href="https://mardopazo.github.io/ErrorValor-IA/en/">
+<link rel="alternate" hreflang="es" href="https://mardopazo.github.io/ErrorValor-IA/">
+<link rel="alternate" hreflang="en" href="https://mardopazo.github.io/ErrorValor-IA/en/">
+<link rel="alternate" hreflang="x-default" href="https://mardopazo.github.io/ErrorValor-IA/">
+<meta name="theme-color" content="#edf0ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11181b" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_AR">
+<meta property="og:site_name" content="ErrorValor-IA">
+<meta property="og:title" content="Managing Error in the Age of AI: From the Panopticon to a Learning Culture">
+<meta property="og:description" content="With AI we write code faster than we can understand it. A management model for development teams where error is seen, discussed and learned from.">
+<meta property="og:url" content="https://mardopazo.github.io/ErrorValor-IA/en/">
+<meta property="og:image" content="https://mardopazo.github.io/ErrorValor-IA/assets/og-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Plan of a panopticon with one highlighted cell and the title of the paper.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/literata-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script>try{var t=localStorage.getItem("tema");if(t)document.documentElement.setAttribute("data-tema",t)}catch(e){}</script>
+</head>
+<body class="paper">
+<a class="salto" href="#contenido">Skip to content</a>
+<header class="barra">
+  <a class="marca" href="index.html" aria-label="ErrorValor-IA, home">Error<b>Valor</b>-IA</a>
+  <nav class="nav" aria-label="Main"><a href="index.html" aria-current="page">Paper</a><a href="../anexo-a.html">Annex A (ES)</a><a href="../anexo-b.html">Annex B (ES)</a><a href="https://github.com/mardopazo/ErrorValor-IA" rel="noopener">Repository</a></nav>
+  <div class="herramientas">
+    <nav class="idiomas" aria-label="Language"><a href="../index.html" lang="es" hreflang="es">ES</a><a href="index.html" lang="en" hreflang="en" aria-current="true">EN</a></nav>
+    <button class="boton-icono" id="boton-tema" type="button" aria-label="Switch between light and dark theme"><svg class="icono-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icono-luna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+    <button class="boton-icono" id="boton-menu" type="button" aria-expanded="false" aria-controls="lateral">Contents</button>
+  </div>
+</header>
+<section class="portada" aria-labelledby="titulo">
+  <div>
+    <h1 id="titulo">Managing Error in the Age of AI</h1>
+    <p class="subtitulo">From the Panopticon to a Learning Culture</p>
+    <dl class="ficha"><dt>Author</dt><dd>Martín Dopazo</dd><dt>Version</dt><dd>Draft v3 — October 28, 2026</dd></dl>
+    <div class="acciones">
+      <a class="boton principal" href="../descargas/ErrorValor-IA_Paper_EN.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  <figure class="figura-panoptico">
+    <svg viewBox="0 0 600 600" role="img" aria-labelledby="pano-t" focusable="false"><title id="pano-t">Plan of a panopticon: a central tower surrounded by lit cells, with one cell highlighted.</title><circle class="pano-aro" cx="300" cy="300" r="280"/><line class="pano-linea" x1="307.2" y1="236.4" x2="323.0" y2="96.3"/><line class="pano-linea" x1="321.1" y1="239.6" x2="367.7" y2="106.5"/><line class="pano-linea" x1="334.1" y1="245.8" x2="409.1" y2="126.4"/><line class="pano-linea" x1="345.3" y1="254.7" x2="445.0" y2="155.0"/><line class="pano-linea" x1="354.2" y1="265.9" x2="473.6" y2="190.9"/><line class="pano-linea" x1="360.4" y1="278.9" x2="493.5" y2="232.3"/><line class="pano-linea" x1="363.6" y1="292.8" x2="503.7" y2="277.0"/><line class="pano-linea" x1="363.6" y1="307.2" x2="503.7" y2="323.0"/><line class="pano-linea" x1="360.4" y1="321.1" x2="493.5" y2="367.7"/><line class="pano-linea" x1="354.2" y1="334.1" x2="473.6" y2="409.1"/><line class="pano-linea" x1="345.3" y1="345.3" x2="445.0" y2="445.0"/><line class="pano-linea" x1="334.1" y1="354.2" x2="409.1" y2="473.6"/><line class="pano-linea" x1="321.1" y1="360.4" x2="367.7" y2="493.5"/><line class="pano-linea" x1="307.2" y1="363.6" x2="323.0" y2="503.7"/><line class="pano-linea" x1="292.8" y1="363.6" x2="277.0" y2="503.7"/><line class="pano-linea" x1="278.9" y1="360.4" x2="232.3" y2="493.5"/><line class="pano-linea" x1="265.9" y1="354.2" x2="190.9" y2="473.6"/><line class="pano-linea" x1="254.7" y1="345.3" x2="155.0" y2="445.0"/><line class="pano-linea" x1="245.8" y1="334.1" x2="126.4" y2="409.1"/><line class="pano-linea" x1="239.6" y1="321.1" x2="106.5" y2="367.7"/><line class="pano-linea" x1="236.4" y1="307.2" x2="96.3" y2="323.0"/><line class="pano-linea" x1="236.4" y1="292.8" x2="96.3" y2="277.0"/><line class="pano-linea" x1="239.6" y1="278.9" x2="106.5" y2="232.3"/><line class="pano-linea" x1="245.8" y1="265.9" x2="126.4" y2="190.9"/><line class="pano-linea" x1="254.7" y1="254.7" x2="155.0" y2="155.0"/><line class="pano-linea" x1="265.9" y1="245.8" x2="190.9" y2="126.4"/><line class="pano-linea" x1="278.9" y1="239.6" x2="232.3" y2="106.5"/><line class="pano-linea" x1="292.8" y1="236.4" x2="277.0" y2="96.3"/><path class="pano-haz" d="M300 300 L263.5 40.5 A262 262 0 0 1 336.5 40.5 Z"/><path class="pano-celda" style="--i:0" d="M303.89 38.03 A262 262 0 0 1 354.50 43.73 L342.65 99.49 A205 205 0 0 0 303.04 95.02 Z"/><path class="pano-celda" style="--i:1" d="M362.08 45.46 A262 262 0 0 1 410.16 62.29 L386.20 114.00 A205 205 0 0 0 348.58 100.84 Z"/><path class="pano-celda" style="--i:2" d="M417.17 65.66 A262 262 0 0 1 460.30 92.76 L425.42 137.85 A205 205 0 0 0 391.68 116.64 Z"/><path class="pano-celda" style="--i:3" d="M466.38 97.61 A262 262 0 0 1 502.39 133.62 L458.36 169.82 A205 205 0 0 0 430.18 141.64 Z"/><path class="pano-celda" style="--i:4" d="M507.24 139.70 A262 262 0 0 1 534.34 182.83 L483.36 208.32 A205 205 0 0 0 462.15 174.58 Z"/><path class="pano-celda" style="--i:5" d="M537.71 189.84 A262 262 0 0 1 554.54 237.92 L499.16 251.42 A205 205 0 0 0 486.00 213.80 Z"/><path class="pano-celda" style="--i:6" d="M556.27 245.50 A262 262 0 0 1 561.97 296.11 L504.98 296.96 A205 205 0 0 0 500.51 257.35 Z"/><path class="pano-celda" style="--i:7" d="M561.97 303.89 A262 262 0 0 1 556.27 354.50 L500.51 342.65 A205 205 0 0 0 504.98 303.04 Z"/><path class="pano-celda" style="--i:8" d="M554.54 362.08 A262 262 0 0 1 537.71 410.16 L486.00 386.20 A205 205 0 0 0 499.16 348.58 Z"/><path class="pano-celda error" style="--i:9" d="M534.34 417.17 A262 262 0 0 1 507.24 460.30 L462.15 425.42 A205 205 0 0 0 483.36 391.68 Z"/><path class="pano-celda" style="--i:10" d="M502.39 466.38 A262 262 0 0 1 466.38 502.39 L430.18 458.36 A205 205 0 0 0 458.36 430.18 Z"/><path class="pano-celda" style="--i:11" d="M460.30 507.24 A262 262 0 0 1 417.17 534.34 L391.68 483.36 A205 205 0 0 0 425.42 462.15 Z"/><path class="pano-celda" style="--i:12" d="M410.16 537.71 A262 262 0 0 1 362.08 554.54 L348.58 499.16 A205 205 0 0 0 386.20 486.00 Z"/><path class="pano-celda" style="--i:13" d="M354.50 556.27 A262 262 0 0 1 303.89 561.97 L303.04 504.98 A205 205 0 0 0 342.65 500.51 Z"/><path class="pano-celda" style="--i:14" d="M296.11 561.97 A262 262 0 0 1 245.50 556.27 L257.35 500.51 A205 205 0 0 0 296.96 504.98 Z"/><path class="pano-celda" style="--i:15" d="M237.92 554.54 A262 262 0 0 1 189.84 537.71 L213.80 486.00 A205 205 0 0 0 251.42 499.16 Z"/><path class="pano-celda" style="--i:16" d="M182.83 534.34 A262 262 0 0 1 139.70 507.24 L174.58 462.15 A205 205 0 0 0 208.32 483.36 Z"/><path class="pano-celda" style="--i:17" d="M133.62 502.39 A262 262 0 0 1 97.61 466.38 L141.64 430.18 A205 205 0 0 0 169.82 458.36 Z"/><path class="pano-celda" style="--i:18" d="M92.76 460.30 A262 262 0 0 1 65.66 417.17 L116.64 391.68 A205 205 0 0 0 137.85 425.42 Z"/><path class="pano-celda" style="--i:19" d="M62.29 410.16 A262 262 0 0 1 45.46 362.08 L100.84 348.58 A205 205 0 0 0 114.00 386.20 Z"/><path class="pano-celda" style="--i:20" d="M43.73 354.50 A262 262 0 0 1 38.03 303.89 L95.02 303.04 A205 205 0 0 0 99.49 342.65 Z"/><path class="pano-celda" style="--i:21" d="M38.03 296.11 A262 262 0 0 1 43.73 245.50 L99.49 257.35 A205 205 0 0 0 95.02 296.96 Z"/><path class="pano-celda" style="--i:22" d="M45.46 237.92 A262 262 0 0 1 62.29 189.84 L114.00 213.80 A205 205 0 0 0 100.84 251.42 Z"/><path class="pano-celda" style="--i:23" d="M65.66 182.83 A262 262 0 0 1 92.76 139.70 L137.85 174.58 A205 205 0 0 0 116.64 208.32 Z"/><path class="pano-celda" style="--i:24" d="M97.61 133.62 A262 262 0 0 1 133.62 97.61 L169.82 141.64 A205 205 0 0 0 141.64 169.82 Z"/><path class="pano-celda" style="--i:25" d="M139.70 92.76 A262 262 0 0 1 182.83 65.66 L208.32 116.64 A205 205 0 0 0 174.58 137.85 Z"/><path class="pano-celda" style="--i:26" d="M189.84 62.29 A262 262 0 0 1 237.92 45.46 L251.42 100.84 A205 205 0 0 0 213.80 114.00 Z"/><path class="pano-celda" style="--i:27" d="M245.50 43.73 A262 262 0 0 1 296.11 38.03 L296.96 95.02 A205 205 0 0 0 257.35 99.49 Z"/><circle class="pano-torre" cx="300" cy="300" r="58"/><circle class="pano-luz" cx="300" cy="300" r="9"/></svg>
+    <figcaption><span class="leyenda"><i class="tenue"></i>Observed cell</span><span class="leyenda"><i class="fuerte"></i>Error, in plain view of the team</span></figcaption>
+  </figure>
+</section>
+<div class="pagina">
+  <aside class="lateral" id="lateral" aria-label="Page contents">
+    <nav class="nav-movil" aria-label="Site sections"><a href="index.html" aria-current="page">Paper</a><a href="../anexo-a.html">Annex A (ES)</a><a href="../anexo-b.html">Annex B (ES)</a><a href="https://github.com/mardopazo/ErrorValor-IA" rel="noopener">Repository</a></nav>
+    <svg class="anillo" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><a href="#summary" aria-hidden="true" tabindex="-1"><path data-sec="0" d="M61.47 4.02 A56 56 0 0 1 86.72 10.79 L76.22 30.12 A34 34 0 0 0 60.89 26.01 Z"><title>Summary</title></path></a><a href="#seccion-1" aria-hidden="true" tabindex="-1"><path data-sec="1" d="M89.26 12.25 A56 56 0 0 1 107.75 30.74 L88.99 42.24 A34 34 0 0 0 77.76 31.01 Z"><title>1. The problem: code travels faster than understanding</title></path></a><a href="#seccion-2" aria-hidden="true" tabindex="-1"><path data-sec="2" d="M109.21 33.28 A56 56 0 0 1 115.98 58.53 L93.99 59.11 A34 34 0 0 0 89.88 43.78 Z"><title>2. Hypothesis</title></path></a><a href="#seccion-3" aria-hidden="true" tabindex="-1"><path data-sec="3" d="M115.98 61.47 A56 56 0 0 1 109.21 86.72 L89.88 76.22 A34 34 0 0 0 93.99 60.89 Z"><title>3. Why teams hide error</title></path></a><a href="#seccion-4" aria-hidden="true" tabindex="-1"><path data-sec="4" d="M107.75 89.26 A56 56 0 0 1 89.26 107.75 L77.76 88.99 A34 34 0 0 0 88.99 77.76 Z"><title>4. Error as an object of knowledge</title></path></a><a href="#seccion-5" aria-hidden="true" tabindex="-1"><path data-sec="5" d="M86.72 109.21 A56 56 0 0 1 61.47 115.98 L60.89 93.99 A34 34 0 0 0 76.22 89.88 Z"><title>5. Responsibility without blame</title></path></a><a href="#seccion-6" aria-hidden="true" tabindex="-1"><path data-sec="6" d="M58.53 115.98 A56 56 0 0 1 33.28 109.21 L43.78 89.88 A34 34 0 0 0 59.11 93.99 Z"><title>6. Proposal: three lines of action</title></path></a><a href="#seccion-7" aria-hidden="true" tabindex="-1"><path data-sec="7" d="M30.74 107.75 A56 56 0 0 1 12.25 89.26 L31.01 77.76 A34 34 0 0 0 42.24 88.99 Z"><title>7. How to know whether it works</title></path></a><a href="#seccion-8" aria-hidden="true" tabindex="-1"><path data-sec="8" d="M10.79 86.72 A56 56 0 0 1 4.02 61.47 L26.01 60.89 A34 34 0 0 0 30.12 76.22 Z"><title>8. Limits and objections</title></path></a><a href="#seccion-9" aria-hidden="true" tabindex="-1"><path data-sec="9" d="M4.02 58.53 A56 56 0 0 1 10.79 33.28 L30.12 43.78 A34 34 0 0 0 26.01 59.11 Z"><title>9. Conclusion</title></path></a><a href="#references" aria-hidden="true" tabindex="-1"><path data-sec="10" d="M12.25 30.74 A56 56 0 0 1 30.74 12.25 L42.24 31.01 A34 34 0 0 0 31.01 42.24 Z"><title>References</title></path></a><a href="#annexes" aria-hidden="true" tabindex="-1"><path data-sec="11" d="M33.28 10.79 A56 56 0 0 1 58.53 4.02 L59.11 26.01 A34 34 0 0 0 43.78 30.12 Z"><title>Annexes</title></path></a><circle cx="60" cy="60" r="14"/></svg>
+    <p class="contenido-titulo">On this page</p>
+    <ol class="indice"><li><a href="#summary">Summary</a></li><li><a href="#seccion-1">1. The problem: code travels faster than understanding</a></li><li><a href="#seccion-2">2. Hypothesis</a></li><li><a href="#seccion-3">3. Why teams hide error</a></li><li><a href="#seccion-4">4. Error as an object of knowledge</a></li><li><a href="#seccion-5">5. Responsibility without blame</a></li><li><a href="#seccion-6">6. Proposal: three lines of action</a></li><li><a href="#seccion-7">7. How to know whether it works</a></li><li><a href="#seccion-8">8. Limits and objections</a></li><li><a href="#seccion-9">9. Conclusion</a></li><li><a href="#references">References</a></li><li><a href="#annexes">Annexes</a></li></ol>
+  </aside>
+  <main class="prosa" id="contenido">
+<section id="summary"><h2 id="summary">Summary</h2>
+<p>With AI we write code much faster than we can review it, understand it and take ownership of it. The analysis that used to happen before production (possible paths, edge cases, business rules) moves into applications that are already in use. My argument in this paper is that management’s answer cannot be more control, but an environment where error is seen, discussed and valued as a source of knowledge. I look at how the monitoring tools we use every day push people to hide errors, I propose telling blame apart from responsibility, and I leave three lines of action with two concrete tools: a blameless post-mortem template (<a href="../anexo-a.html">Annex A</a>) and guidelines for dailies without surveillance (<a href="../anexo-b.html">Annex B</a>).</p>
+<hr />
+</section><section id="seccion-1"><h2 id="seccion-1"><span class="num">1</span>The problem: code travels faster than understanding</h2>
+<p>Code is produced at a speed that doesn’t leave room to evaluate it, analyze it and review it, and this happens at every stage of control:</p>
+<ul>
+<li><strong>In the developer’s own debugging</strong>, who accepts whatever “seems to work”.</li>
+<li><strong>In tests</strong>, which AIs tend to steer toward the happy path.</li>
+<li><strong>In Pull Requests</strong>, which often aren’t reviewed in depth: they get skimmed, and someone checks that it compiles.</li>
+</ul>
+<p>The result is that the moment of analysis (possible paths, edge cases, business rules) moves to production. Problems show up with the system already in use, in front of the users.</p>
+<p>Ariel Fabian (2026) named this phenomenon the <strong>“bullet effect”</strong>, by analogy with ultra-fast chess, where the lack of time rules out deep calculation. His thesis is that the problem isn’t the tool but the pace: a person needs time to understand how software works, and can’t do it at the speed at which a model generates text. When that happens, <strong>cognitive debt</strong> piles up: systems that work but that nobody on the team knows how to change safely, and whose failures can go straight to production. Fabian backs the diagnosis with recent evidence that he cites:</p>
+<ul>
+<li>Across 196,000 Pull Requests, deep human review dropped from 48% to 21% (He and Vasilescu, 2026).</li>
+<li>In organizations with massive AI adoption and no rules, changes approved without prior review rose 76.3% and critical production incidents rose 125.4% (Faros AI, 2026; this is an observational pattern).</li>
+<li>In a controlled trial with developers, those who delegated to AI understood 17 percentage points fewer of the concepts (Shen and Tamkin, 2025).</li>
+</ul>
+<p>Fabian proposes five working rules adapted from chess (pace control, the 10 + 10 rule, a “cognitive toll” before the commit, preventive audit and the centaur model). And he acknowledges a limitation that, for me, is the starting point of this paper: <em>no technical rule works in isolation if the tracking indicators only look at immediate delivery volume</em>; when the pressure of the calendar beats the space for analysis, any control becomes a formal step that gets completed just to tick the box.</p>
+<p>I start from that diagnosis and focus on <strong>the other half of the problem</strong>: what happens to a team when, on top of speed pressure, it works in an environment where making a mistake has consequences. The rules about pace and absorption (the cognitive toll, the 10 + 10) only work if the team can say “I don’t understand this” without paying a price, and if what gets measured doesn’t reward apparent speed. No technical rule guarantees that: it’s a management decision.</p>
+</section><section id="seccion-2"><h2 id="seccion-2"><span class="num">2</span>Hypothesis</h2>
+<blockquote class="tesis">
+<p>Teams that make error visible, analyzable and valued understand better what they deliver, and that understanding is the best defense we have against the cognitive debt of AI-generated code.</p>
+</blockquote>
+<p>From this comes a challenge for those of us who manage teams: to create an environment of <strong>review, rethinking, cooperation and transparency</strong> (<em>disclosure</em>) about what we know and what we don’t know about the model, the architecture and the features we are building.</p>
+<p>And, at the same time, to avoid the cognitive debt of using code that isn’t understood or wasn’t reviewed. Its consequence is the <strong>absence of architectural purpose</strong>: teams that build and support systems made at full speed, that nobody understands and that nobody owns.</p>
+</section><section id="seccion-3"><h2 id="seccion-3"><span class="num">3</span>Why teams hide error</h2>
+<h3 id="seccion-3-1">3.1 Management styles</h3>
+<p>There are several ways to lead a development team. Some look for whoever is responsible for the error. Others downplay it, but still measure each developer’s “productivity” by the errors they make.</p>
+<p>And there is a third attitude that seems healthy but also deserves some distrust: <em>“it doesn’t matter who made the mistake, I’m not looking for people to blame but for solutions”</em>. Without meaning to, that stance <strong>veils the error in favor of the solution</strong>: it gets fixed, but nothing is learned about the development or about why the error happened. The problem is solved and the learning is lost.</p>
+<h3 id="seccion-3-2">3.2 The panopticon as a management metaphor</h3>
+<p>Excessive control (permanent meetings where people must account for progress and delays) achieves the opposite of what it seeks: problems get <em>hidden</em>, or people write code that “saves” what is visible without anyone knowing precisely what it does or what other problems it may bring.</p>
+<p>Michel Foucault, in <em>Discipline and Punish</em>, describes the panopticon as a device applied to schools, hospitals, factories and barracks to order, correct and normalize behavior. What makes it effective is that control is <strong>internalized</strong>: since we never know for sure whether we are being watched at this moment, we end up acting as if we were always being watched.</p>
+<p>Byung-Chul Han (<em>Psychopolitics</em>, <em>The Burnout Society</em>) adds that power today works less through external discipline than through voluntary exposure and self-exploitation: the digital panopticon is subtler and more effective because it needs no watcher. That difference matters here. In a development team the pressure almost never comes from a boss who watches, but from a board that updates itself and an availability that is put on display.</p>
+<blockquote class="nota">
+<p><strong>A note on the metaphor.</strong> I’m not saying that Jira, dailies or pair programming are surveillance in themselves. I’m saying that, <strong>when they are used to control the person and not to coordinate the work</strong>, they produce the effects I describe here. I come back to this in section 8.</p>
+</blockquote>
+<h3 id="seccion-3-3">3.3 Tools as part of the device</h3>
+<div class="tabla apilable" tabindex="0" role="region" aria-label="Table"><table>
+<thead>
+<tr>
+<th>Tool or practice</th>
+<th>Stated purpose</th>
+<th>Possible real effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Tool or practice">Background apps (Teams, Discord)</td>
+<td data-label="Stated purpose">Make immediate communication easier and unblock people</td>
+<td data-label="Possible real effect">Monitoring of idle time</td>
+</tr>
+<tr>
+<td data-label="Tool or practice">Permanent voice channels</td>
+<td data-label="Stated purpose">Simulate the closeness of the physical office when remote</td>
+<td data-label="Possible real effect">Loss of privacy and of space to concentrate</td>
+</tr>
+<tr>
+<td data-label="Tool or practice">Repository metrics (commits, lines, PRs)</td>
+<td data-label="Stated purpose">Measure the stability and progress of the project</td>
+<td data-label="Possible real effect">Quantifying human effort as if it were performance</td>
+</tr>
+</tbody>
+</table></div>
+<p>What this looks like in practice:</p>
+<ul>
+<li><strong>Constant presence.</strong> Statuses (“Available”, “Away”, “In a meeting”) work like the lit windows of Bentham’s cells. We know our availability is visible in real time, and that creates the pressure to be “always on”.</li>
+<li><strong>Meetings and permanent voice.</strong> Dailies that run long, mandatory pair programming and voice channels left open all day are justified as “organic collaboration”, but they expose the time and thinking pace of whoever is programming and, with that, their possible mistakes.</li>
+<li><strong>The panopticon in the code.</strong> The commit history (frequency, lines, delivery time) and the management metrics (time per task, burndown) end up working as performance records. The number of commits or PRs matters more than the architectural decision of organizing them so they can be understood and reviewed.</li>
+</ul>
+<p><strong>The AI aggravating factor.</strong> AI-assisted generation inflates exactly the activity metrics: more commits, more lines, more PRs in less time. If we use those metrics to evaluate, we measure more and more noise and less and less understanding. And metrics of AI <em>usage</em> (acceptance of suggestions, volume generated) are becoming a new control board.</p>
+<p>This is already happening. According to specialized press, Meta came to include AI token consumption in its engineers’ evaluations: there were leaderboards, and people took on extra tasks just to improve their score, which became known as <em>tokenmaxxing</em>. In September 2026, according to an internal memo, the company decided to stop using AI adoption dashboards and token counts to evaluate impact, and to go back to looking at the quality of the result, speed and the complexity of the problems (Cooter, 2026). Its own CTO had already warned that token usage, on its own, doesn’t measure impact of any kind. It is Goodhart’s law live: when a measure becomes a target, it stops being a good measure. That same law was cited by a fintech manager in a survey about AI usage dashboards, which also recorded developers’ distrust of such detailed data on how they use their tools (Lazzaro, 2025).</p>
+<h3 id="seccion-3-4">3.4 The consequence: self-censorship</h3>
+<p>The deepest effect isn’t the possible punishment but <strong>self-censorship</strong>. In software development it shows up in very concrete behaviors:</p>
+<ul>
+<li><strong>Productivity theater.</strong> Visible tasks (moving cards, writing in public channels) get priority over deep work and complex problems, which need time away from the noise.</li>
+<li><strong>Availability anxiety.</strong> The fear of showing up as “Away” fragments attention: the flow is cut to answer alerts and code quality is sacrificed to demonstrate presence.</li>
+<li><strong>The illusion of autonomy.</strong> Agile methodologies are presented as self-organization frameworks, but if they depend on strict data monitoring and constant meetings, autonomy becomes <strong>coordinated self-surveillance</strong>: the team disciplines itself just to satisfy the board’s metric.</li>
+</ul>
+<p>Programming requires abstraction and, above all, understanding the problem. The digital panopticon asks for something else: visibility and communicative noise. The result is code that works today and that nobody can explain tomorrow, plus a burnout that is paid for by people.</p>
+</section><section id="seccion-4"><h2 id="seccion-4"><span class="num">4</span>Error as an object of knowledge</h2>
+<p>To build an environment that is friendly to error and to what we don’t know, I rely on <strong>constructivism</strong>, the current in learning theory according to which knowledge isn’t received ready-made but constructed, and error is part of that process. Emilia Ferreiro, a student of Piaget, showed this with how children learn to write: what looks from the outside like children’s mistakes are hypotheses of their own, coherent ones, which they keep revising until they get closer to the convention (Ferreiro and Teberosky, 1979). An error isn’t necessarily a flaw or a failure: it is, most likely, <strong>evidence of a hypothesis in crisis</strong>, the logic behind the error.</p>
+<p>The underlying strategy is to <strong>accept, value and discuss</strong> error: not to justify or defend ourselves, but to explain it. And not only what was functional, but <strong>the logic that led us to produce it</strong>.</p>
+<p>An error can have many origins:</p>
+<ul>
+<li>a badly worded prompt;</li>
+<li>a poor analysis of the business rule the software has to meet;</li>
+<li>edge cases that weren’t considered;</li>
+<li>environments with exceptional conditions (no connectivity, database down, etc.);</li>
+<li>an infrastructure that can’t support the requirements.</li>
+</ul>
+<p>Only if we value and accept error do we come to understand the model and the flows of the software in action. And that, in addition, helps us anticipate problems more precisely and diagnose better the ones that appear.</p>
+</section><section id="seccion-5"><h2 id="seccion-5"><span class="num">5</span>Responsibility without blame</h2>
+<p>A culture without blame faces a predictable objection: if nobody is to blame, who takes charge? My answer is that <strong>blame and responsibility are different things</strong>, and that a culture of error needs the second precisely in order to do without the first.</p>
+<div class="tabla apilable" tabindex="0" role="region" aria-label="Table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Blame</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label=""><strong>Looks toward</strong></td>
+<td data-label="Blame">The past: the damage already done</td>
+<td data-label="Responsibility">The future: repair and prevention</td>
+</tr>
+<tr>
+<td data-label=""><strong>Asks</strong></td>
+<td data-label="Blame">Who did it? What do they deserve?</td>
+<td data-label="Responsibility">What happened? Who needs what? What do we change?</td>
+</tr>
+<tr>
+<td data-label=""><strong>Effect on the team</strong></td>
+<td data-label="Blame">Information gets hidden</td>
+<td data-label="Responsibility">Information gets shared</td>
+</tr>
+<tr>
+<td data-label=""><strong>Result</strong></td>
+<td data-label="Blame">Punishment</td>
+<td data-label="Responsibility">Learning and improvement of the system</td>
+</tr>
+</tbody>
+</table></div>
+<p>The distinction has precedents. Sidney Dekker, in his work on <em>just culture</em> (<em>Just Culture: Balancing Safety and Accountability</em>), contrasts a <strong>retributive</strong> version, which classifies behaviors and asks what punishment is due, with a <strong>restorative</strong> version, which asks who was affected, what they need and whose job it is to attend to it. John Allspaw, when he introduced blameless post-mortems at Etsy (2012), framed it in management terms: look at errors “from a learning perspective” and balance safety and accountability, not eliminate the latter.</p>
+<p>Applied to development with AI, this translates into a concrete rule:</p>
+<blockquote class="regla">
+<p><strong>Whoever approves takes responsibility.</strong> They must be able to explain what the change does, why it does it and which cases it doesn’t cover, even if they didn’t write it. “It was the AI’s mistake” is not an explanation, neither for whoever develops nor for whoever manages.</p>
+</blockquote>
+<p>The rule doesn’t punish the error: it <strong>points at opacity</strong>. If someone can’t explain a change, what should be expected is not a sanction but a repair: read it together, write the missing test or undo the change. What is protected is the team’s understanding, not anyone’s reputation.</p>
+<p>This doesn’t mean I’m unaware that there are behaviors no healthy culture condones, such as deliberate negligence; I leave it outside this paper. What I do propose is a precaution before pointing at someone: ask whether the system rewards that behavior.</p>
+<blockquote class="tesis">
+<p>Whoever approves a PR without reading it, in an environment where closed PRs per week are measured, isn’t breaking the rules: they’re following them.</p>
+</blockquote>
+<p>Finally, there is one irresponsibility that this culture does want to eliminate: <strong>hiding the error</strong>. Whoever hides it takes charge neither of the failure nor of what the team could learn from it. That is why psychological safety is not the opposite of responsibility: it is what makes it possible.</p>
+</section><section id="seccion-6"><h2 id="seccion-6"><span class="num">6</span>Proposal: three lines of action</h2>
+<p>Team management has to move from a culture of <strong>presence monitoring</strong> to a culture of <strong>impact and psychological safety</strong>. In software, error isn’t a personal flaw: it is an unavoidable by-product of exploring, of trying to solve problems and of innovating. With these strategies, management stops being the central watchtower and becomes a <strong>facilitator of infrastructure and trust</strong>, so that building software can once again be a creative and iterative discipline.</p>
+<h3 id="seccion-6-1">6.1 Reconfigure communication and presence</h3>
+<ul>
+<li><strong>Sovereignty over availability status.</strong> An explicit “no indicators” policy: it should be normal to close the messaging app or switch to “Do Not Disturb” for blocks of 3 or 4 hours of deep work.</li>
+<li><strong>Asynchronous communication by default.</strong> A reply can take 1 or 2 hours without that meaning a lack of commitment. For urgent matters, a specific escalation channel is defined (a phone call, for example).</li>
+<li><strong>No permanent voice rooms.</strong> Replace them with limited “office hours” (30 minutes at the start or end of the day, for example) or with one-off design rooms. Collaborating has to be a conscious decision, not a continuous exposure.</li>
+</ul>
+<h3 id="seccion-6-2">6.2 Redefine metrics</h3>
+<ul>
+<li><strong>Impact, not activity.</strong> Avoid lines of code, hours online or number of commits as a measure of performance. Measure the value delivered to the user, the stability of the system, the fulfillment of sprint goals and, above all, <strong>the technical understanding of what is contributed to the system</strong>.</li>
+<li><strong>The board as a map, not a whip.</strong> Management tools are there so the team can coordinate dependencies, not to micromanage every task. If a card falls behind, the question is <em>“how can I help you unblock it?”</em> and not <em>“why did it take you longer?”</em>. And if the blockage reveals something relevant about the system, it is analyzed in depth and, once resolved, the finding is shared with the team.</li>
+</ul>
+<h3 id="seccion-6-3">6.3 Institutionalize error as a natural part of the work</h3>
+<p>For the team to stop hiding failures out of fear of surveillance, error has to be visible, analyzed and understood as a source of improvement.</p>
+<ul>
+<li><strong>Blameless post-mortems.</strong> After a serious production failure or a critical bug, the meeting concentrates on how and why the system failed, not on who made the mistake. It looks for process failures, missing automated tests or ambiguity in the requirements. In teams that use AI, the analysis includes the <strong>prompt, the context it was given and what was actually reviewed</strong> (template in <a href="../anexo-a.html">Annex A</a>).</li>
+<li><strong>Safe experimentation environments.</strong> Solid local or staging environments where breaking the code is cheap and safe. If I know that an error in my branch has no punitive consequences or negative exposure, I dare to look for better architecture solutions.</li>
+<li><strong>Shared learning sessions (FailFaire).</strong> Monthly spaces where tech leads and senior developers share their recent mistakes and what they learned. Seeing the people we look up to be vulnerable dismantles the panoptic illusion of mandatory perfection.</li>
+<li><strong>Dailies without surveillance.</strong> The daily stops being an individual report and becomes an inspection of the team’s work (guidelines in <a href="../anexo-b.html">Annex B</a>).</li>
+</ul>
+</section><section id="seccion-7"><h2 id="seccion-7"><span class="num">7</span>How to know whether it works</h2>
+<p>A proposal about metrics has to be measurable, taking care not to reproduce the problem it criticizes. Some possible indicators:</p>
+<ul>
+<li><strong>Delivery stability:</strong> change failure rate and recovery time (DORA metrics).</li>
+<li><strong>Learning:</strong> number of post-mortems held and of preventive actions actually closed.</li>
+<li><strong>Understanding:</strong> percentage of changes where whoever approved was able to explain them, sampled and not person by person.</li>
+<li><strong>Climate:</strong> a short, anonymous survey on psychological safety (for example, Edmondson’s scale).</li>
+</ul>
+<p>Measuring the adoption of a blameless culture with individual, permanent instruments would be creating a new panopticon. That is why the indicators are collected <strong>at team level, by sampling and with a stated purpose</strong>.</p>
+</section><section id="seccion-8"><h2 id="seccion-8"><span class="num">8</span>Limits and objections</h2>
+<p>A management proposal has to be open to discussion. These are the strongest objections I see and how I answer them, or leave them open.</p>
+<h3 id="seccion-8-1">8.1 Not all control is surveillance</h3>
+<p>A team needs to coordinate, and remote teams even more so. Asynchronous communication avoids interruptions, but it has costs: delays, misunderstandings, decisions waiting on a reply. And there are moments (an incident in progress, a design under discussion) that call for a real-time conversation. That is why I don’t propose eliminating synchronicity but <strong>making it deliberate</strong>: meetings with a purpose and limited duration, and clear escalation channels for urgent matters.
+At the same time, keep in mind the following statement: <strong>If everything is urgent, nothing is urgent</strong>.</p>
+<h3 id="seccion-8-2">8.2 The tools are not the problem</h3>
+<p>Neither Jira, nor dailies, nor pair programming are surveillance in themselves. The same board can be a map that helps coordinate or a whip that measures minutes. The panopticon metaphor describes a <strong>use</strong> of the tools (controlling the person), not the tools.</p>
+<h3 id="seccion-8-3">8.3 A record for auditing is not the same as a record for evaluating</h3>
+<p>Many environments, especially regulated ones, <strong>require traceability</strong>: who changed what and when. I’m not proposing to give up that record, but to separate its purpose: the history serves to audit and to reconstruct an incident, not to measure people’s performance or to build rankings of errors.</p>
+<h3 id="seccion-8-4">8.4 Traceability as responsibility, not as blame</h3>
+<p>Tracing which change caused an incident and who approved it is a legitimate and necessary practice. Experimental designs on development with AI, like the protocol Fabian proposes (2026), take it into account by tracking the commit that caused a failure and recording the authorship of the code. From my perspective, that audit is understood as <strong>responsibility</strong> (the ability to reconstruct what happened, understand why and repair it) and not as <strong>blame</strong>. The difference isn’t in the data but in the use: the same history can serve to learn or to point fingers. For it to remain the former, indicators are aggregated at team level, reported before starting and not used to evaluate people.</p>
+<h3 id="seccion-8-5">8.5 A team doesn’t change alone</h3>
+<p>A team can adopt dailies without surveillance and blameless post-mortems, but if the organization around it evaluates by closed tickets, generated lines or delivery speed, the blameless culture ends up as a mere veneer. Fabian (2026) warns of something equivalent about his rules: no control works in isolation if the indicators only reward immediate volume. What is needed is <strong>coherence across levels</strong>: what the team says, what management measures and what the organization rewards.</p>
+<h3 id="seccion-8-6">8.6 The risk of the empty ritual</h3>
+<p>A blameless post-mortem that produces no closed actions is just another form of theater. The same goes for a “no surveillance” daily that is still an individual report under another name. That is why the annexes ask for actions with an owner and a date, and a periodic review of whether they were carried out.</p>
+<h3 id="seccion-8-7">8.7 Scope and evidence</h3>
+<p>This proposal rests on theory (learning, just culture, psychological safety) and on my experience managing development teams. There is also no single measure of “error culture”, and it is likely that context (team size, sector, level of regulation, maturity) changes its effect.</p>
+<p>As a future line, Fabian’s factorial design (reserved absorption time and cognitive toll) could add a third factor: the team’s climate toward error. The question would be whether the pace and understanding rules work better, the same or worse in teams with high psychological safety. It is a hypothesis, not a result.</p>
+</section><section id="seccion-9"><h2 id="seccion-9"><span class="num">9</span>Conclusion</h2>
+<p>AI didn’t invent the problem of error in software teams, but it made it more costly. When code is produced faster than we can understand it, what wasn’t reviewed reaches production and what nobody understands has no owner. The pace and absorption rules, like Fabian’s, attack that speed. I argue that those rules need a precondition: <strong>an environment where saying “I don’t understand this” costs nothing.</strong></p>
+<p>That environment isn’t achieved with more control. Monitoring tools, permanent meetings and activity metrics, when used to watch the person and not to coordinate the work, push people to hide problems and to produce code that works without anyone knowing why. The alternative I propose rests on three ideas:</p>
+<ol>
+<li><strong>Error is evidence of a hypothesis in crisis</strong>: an object of analysis and learning, not a reason for shame.</li>
+<li><strong>Responsibility is not blame.</strong> Whoever approves takes responsibility for understanding what they deliver; the analysis of a failure concentrates on how the system allowed it.</li>
+<li><strong>What is measured and rewarded has to be coherent with what is said.</strong> Otherwise, the blameless culture stays as a declaration with no effect.</li>
+</ol>
+<p>The concrete tools (blameless post-mortems, dailies centered on the board, impact metrics, spaces to share errors) are a starting point to try in real teams and adjust with data. I don’t have evidence of my own yet, and saying so is part of being consistent: a model that asks us to value error has to be able to be wrong in public.</p>
+<p>The speed of AI isn’t going to slow down. What does depend on those of us who manage teams is deciding what happens when someone makes a mistake: whether it gets hidden or studied. The team’s continued understanding of what it builds depends on that decision.</p>
+<hr />
+</section><section id="references" class="refs"><h2 id="references">References</h2>
+<ul>
+<li>Fabian, A. (2026). <em>El Efecto Bullet: Deuda Cognitiva y la Ilusión de la Velocidad en la Era de la IA</em> (The Bullet Effect: Cognitive Debt and the Illusion of Speed in the Age of AI). Zenodo. DOI 10.5281/zenodo.23641059. <a href="https://arfab.github.io/efectobullet/" rel="noopener">https://arfab.github.io/efectobullet/</a> (In Spanish.)</li>
+<li>Cooter, M. (2026, September 4). Meta minimizes role of token maxing in employee evaluations. <em>InfoWorld</em> / <em>CIO</em>. <a href="https://www.cio.com/article/4218661/meta-minimizes-role-of-token-maxing-in-employee-evaluations-2.html" rel="noopener">https://www.cio.com/article/4218661/meta-minimizes-role-of-token-maxing-in-employee-evaluations-2.html</a> (Cites a report by The Information.)</li>
+<li>Lazzaro, S. (2025, June 18). AI coding trackers are here. Proceed with caution. <em>LeadDev</em>. <a href="https://leaddev.com/reporting/ai-coding-tool-trackers-proceed-with-caution" rel="noopener">https://leaddev.com/reporting/ai-coding-tool-trackers-proceed-with-caution</a></li>
+<li>Foucault, M. <em>Discipline and Punish: The Birth of the Prison.</em></li>
+<li>Foucault, M. <em>Microfísica del poder</em> (Power/Knowledge: Selected Interviews and Other Writings; a Spanish-language compilation).</li>
+<li>Han, B.-C. <em>Psychopolitics: Neoliberalism and New Technologies of Power.</em></li>
+<li>Han, B.-C. <em>The Burnout Society.</em></li>
+<li>Dekker, S. <em>Just Culture: Balancing Safety and Accountability.</em> (Ashgate Publishing, 2007)</li>
+<li>Allspaw, J. (2012). Blameless PostMortems and a Just Culture. Etsy, Code as Craft. (<a href="https://www.etsy.com/pl/codeascraft/blameless-postmortems" rel="noopener">https://www.etsy.com/pl/codeascraft/blameless-postmortems</a>)</li>
+<li>Ferreiro, E. and Teberosky, A. (1979). <em>Los sistemas de escritura en el desarrollo del niño.</em> Siglo XXI. (English edition: <em>Literacy Before Schooling</em>, 1982.)</li>
+<li>Edmondson, A. (1999). Psychological safety and learning behavior in work teams. <em>Administrative Science Quarterly.</em></li>
+<li>Kerth, N. (2001). <em>Project Retrospectives: A Handbook for Team Reviews.</em> (The Prime Directive.)</li>
+<li>DORA / <em>Accelerate</em> (Forsgren, Humble and Kim).</li>
+<li>Schwaber, K. and Sutherland, J. <em>The Scrum Guide</em> (2020).</li>
+</ul>
+</section><section id="annexes"><h2 id="annexes">Annexes</h2>
+<ul>
+<li><a href="anexo-a.html">Annex A. Blameless post-mortem template</a> (Spanish)</li>
+<li><a href="anexo-b.html">Annex B. Guidelines for dailies without surveillance</a> (Spanish)</li>
+</ul></section>
+  </main>
+</div>
+<footer class="pie">
+  <div>
+    <p>Martín Dopazo. This text is a draft under review: it can be discussed, corrected and improved.</p>
+    <p>Content under the <a href="https://creativecommons.org/licenses/by/4.0/deed.en" rel="license noopener">Creative Commons Attribution 4.0 (CC BY 4.0)</a> license: you may copy, adapt and share it, even for commercial purposes, crediting Martín Dopazo and this site.</p>
+    <p><a href="https://github.com/mardopazo/ErrorValor-IA" rel="noopener">Code and sources on GitHub</a></p>
+  </div>
+</footer>
+<script src="../assets/site.js" defer></script>
+
+</body>
+</html>

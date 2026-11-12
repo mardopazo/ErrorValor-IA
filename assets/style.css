@@ -119,6 +119,11 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .boton-icono:hover { border-color: var(--tinta-2); }
 .boton-icono svg { width: 1.1rem; height: 1.1rem; }
+.idiomas { display: inline-flex; height: 2.25rem; border: 1px solid var(--celda); border-radius: 999px; overflow: hidden;
+  font-family: var(--titulos); font-stretch: 92%; font-weight: 700; font-size: .82rem; letter-spacing: .04em; }
+.idiomas a { display: inline-grid; place-items: center; padding: 0 .7rem; color: var(--tinta-2); text-decoration: none; }
+.idiomas a:hover { color: var(--tinta); }
+.idiomas a[aria-current="true"] { background: var(--tinta); color: var(--papel); }
 .icono-luna { display: none; }
 :root[data-tema="oscuro"] .icono-sol { display: none; }
 :root[data-tema="oscuro"] .icono-luna { display: block; }
